@@ -23,8 +23,7 @@ def login_post():
     account_obj = _get_account_by_email(request.form.get('email', ''))
     if account_obj:
         if account_obj.check_password(request.form.get('password', '')):
-            auth_token = account_obj.get_token()
-            auth_token['account'] = account_obj.present()
+            account = account_obj.present()
         else:
             raise MainException.ACCOUNT_PASSWORD_WRONG
     else:
@@ -33,16 +32,15 @@ def login_post():
     if 'user' not in session:
         session['user'] = {}
 
-    if auth_token:
-        session['user']['name'] = auth_token.get('account').get('name')
-        session['user']['access_token'] = auth_token.get('access_token')
-        session['user']['id'] = auth_token.get('account').get('id')
-        session['user']['email'] = auth_token.get('account').get('email')
-        session['user']['email_checked'] = auth_token.get('account').get('email_checked')
-        session['user']['role'] = auth_token.get('account').get('role')
-        session['user']['property'] = auth_token.get('account').get('property')
+    if account:
+        session['user']['name'] = account.get('name')
+        session['user']['id'] = account.get('id')
+        session['user']['email'] = account.get('email')
+        session['user']['email_checked'] = account.get('email_checked')
+        session['user']['role'] = account.get('role')
+        session['user']['property'] = account.get('property')
 
-    return send_response(auth_token)
+    return send_response(account)
 
 
 @api.route('/send_verify_email', methods=['POST'])
@@ -58,22 +56,20 @@ def verify_mail():
                         password=request.form.get('password', ''),
                         role=RoleType.DEVELOPER,
                         email_checked=0):
-        auth_token = account_obj.get_token()
         account_obj.verify_email(email_cb=url_for('web.register_valid', code='', _external=True))
 
-        auth_token['account'] = account_obj.present()
+        account = account_obj.present()
 
         if 'user' not in session:
             session['user'] = {}
 
-        if auth_token:
-            session['user']['access_token'] = auth_token.get('access_token')
-            session['user']['id'] = auth_token.get('account').get('id')
-            session['user']['email'] = auth_token.get('account').get('email')
-            session['user']['email_checked'] = auth_token.get('account').get('email_checked')
-            session['user']['role'] = auth_token.get('account').get('role')
+        if account:
+            session['user']['id'] = account.get('id')
+            session['user']['email'] = account.get('email')
+            session['user']['email_checked'] = account.get('email_checked')
+            session['user']['role'] = account.get('role')
 
-        return send_response(auth_token)
+        return send_response(account)
 
 
 @api.route('/verify_email', methods=['POST'])

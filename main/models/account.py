@@ -10,14 +10,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from operator import or_
 import time
 import logging
-from itsdangerous import URLSafeTimedSerializer
-from config import SECRET_KEY, TOKEN_SALT
-
-TOKEN_SALT_TYPE = 'oauth2'
-
-
-def token_serializer(token_type):
-    return URLSafeTimedSerializer(SECRET_KEY, salt="{}.{}".format(TOKEN_SALT, token_type))
 
 
 def set_password(key, account_obj, pwd):
@@ -156,42 +148,3 @@ class Account(God):
             return check_password_hash(self.password, password)
 
         return False
-
-    def _gen_token(self, grant_type, client_id, ro_id, client_obj=None):
-        token_length = 40
-
-        time_now = int(time.time())
-
-        token_type = 'Bearer'
-        # 永不过期
-        expires_in = 0
-        refresh_token = random_ascii_string(token_length)
-        access_token = token_serializer(TOKEN_SALT_TYPE).dumps((grant_type, client_id, ro_id, time_now, expires_in))
-
-        # 保存token信息
-
-        # 同一秒多次请求导致写入失败，使用REPLACE代替INSERT
-        result = self.mysql.execute(
-            "REPLACE INTO token (grant_type,access_token,expires_in,refresh_token,client_id,ro_id,ctime) "
-            "VALUES (%s,%s,%s,%s,%s,%s,%s)",
-            (grant_type, access_token, expires_in, refresh_token, client_id, ro_id, time_now)
-        )
-
-        if result:
-            data = {
-                'access_token': access_token,
-                'token_type': token_type,
-                'expires_in': expires_in,
-                'refresh_token': refresh_token,
-            }
-
-            if client_obj:
-                data['app_id'] = client_obj.app.id
-
-            return data
-        else:
-            return None
-
-    def get_token(self):
-        return self._gen_token(GrantType.ACCOUNT_CREDENTIALS, 0, self.id)
-

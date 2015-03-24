@@ -6,7 +6,7 @@ def login_required(function=None, redirect_url_for=None):
     def actual_decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
-            if 'user' in session and session['user'].get('access_token'):
+            if 'user' in session and session['user'].get('id'):
                 if session['user']['role'] == 1:
                     if session['user'].get('email_checked') == 0:
                         return redirect(url_for('web.register_valid'))

@@ -27,13 +27,10 @@ def update_session():
 @web.before_request
 def before_request():
     g.uri_path = request.path
-    if 'user' in session and session['user'].get('id'):
-        if session['user'].get('email_checked') == 0:
-            return redirect(url_for('web.register_valid'))
-        else:
-            # 已登录跳转到im主页
-            if g.uri_path in ['/login', '/register']:
-                return redirect(url_for('web.im_index'))
+    # if 'user' in session and session['user'].get('id'):
+    # 已登录跳转到im主页
+    # if g.uri_path in ['/login', '/register']:
+    # return redirect(url_for('web.im_index'))
 
 
 @web.route('/login')
@@ -61,7 +58,6 @@ def register_valid():
         if 'user' in session:
             account_obj = get_user()
             confirm = account_obj.confirm_email(code, EmailUsageType.DEVELOPER_VERIFY)
-
             if confirm:
                 account_obj.id = confirm['ro_id']
                 account_obj.email = confirm['email']
@@ -72,7 +68,7 @@ def register_valid():
             else:
                 error = '确认邮件失败'
 
-    if 'user' in session and session['user'].get('access_token'):
+    if 'user' in session and session['user'].get('id'):
         update_session()
 
     if 'user' in session and session['user'].get('email'):
@@ -179,7 +175,7 @@ def password_forget_check():
     if code and mail:
         return render_template('user/reset_password.html', data={'code': code, 'mail': mail})
 
-    if 'user' in session and session['user'].get('access_token'):
+    if 'user' in session and session['user'].get('id'):
         update_session()
 
     if mail:
