@@ -165,7 +165,7 @@ class Certificate(object):
     def create_download_url(client_id, cer_type, secret):
         data = str(client_id) + "," + str(cer_type) + "," + str(int(time.time()))
 
-        sign = Md5Utils.sign(data, secret)
+        sign = Md5Utils.sign(data, str(secret))
         path = base64.b64encode(data + "," + sign)
         return url_for('.download',
                        path=path,

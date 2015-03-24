@@ -23,17 +23,8 @@ class Client(God):
         'developer_id',
         'platform_type',
         'platform_identity',
-        'secret',
-        'package_src',
-        'length',
-        'version_num',
-        'version_name',
-        'intro',
         'ctime',
         'utime',
-        'verify_status',
-        'verify_time',
-        'verify_remark',
         'is_active'
     )
 
@@ -210,6 +201,6 @@ class Client(God):
 
     def get_certificate_url(self):
         return {
-            'pkey_url': Certificate.create_download_url(self.get_id(), 'pkey', self.secret),
-            'cer_url': Certificate.create_download_url(self.get_id(), 'cer', self.secret)
+            'pkey_url': Certificate.create_download_url(self.get_id(), 'pkey', self.ctime),
+            'cer_url': Certificate.create_download_url(self.get_id(), 'cer', self.ctime)
         }

@@ -28,15 +28,17 @@
               {% for item in data.list %}
                 <tr>
                   <td>
-                    <a href="/im/game/detail/{{item.app_id}}?game={{item.app_id}}&platform={{item.platform_type}}&name={{item.app_name}}&client={{item.id}}&type=push">{{item.app_name}}</a>
+                    <a href="/im/game/detail/{{item.id}}?game={{ item.id }}&name={{item.name}}">{{item.name}}</a>
                   </td>
                   <td>
                     <span>
-                      {% if item.platform_type | int == 1 %}
+                    {% for platform_type in item.platform_types %}
+                      {% if platform_type | int == 1 %}
                         Android
-                      {% elif item.platform_type | int == 2 %}
+                      {% elif platform_type | int == 2 %}
                         iOS
                       {% endif %}
+                    {% endfor %}
                     </span>
                   </td>
                 </tr>

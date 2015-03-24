@@ -27,6 +27,24 @@
         </p>
       {% endcall %}
 
+      {% call inline_field('App ID:') %}
+        <p class="show-edit">
+          <span class="name">{{ data.gamedata.id }}</span>
+        </p>
+      {% endcall %}
+
+      {% call inline_field('App Key:') %}
+        <p class="show-edit">
+          <span class="name">{{ data.gamedata.key }}</span>
+        </p>
+      {% endcall %}
+
+      {% call inline_field('App Secret:') %}
+        <p class="show-edit">
+          <span class="name">{{ data.gamedata.secret }}</span>
+        </p>
+      {% endcall %}
+
       {% call inline_field('支持平台:') %}
         {% for item in data.gamedata.clients %}
           {% if item.platform_type == 1 and item.is_active == 1 %}
@@ -55,8 +73,6 @@
             {% endif %}
             <td>
               <div class="td key-td apns-td">
-                <p>AppID: {{ item.id }}</p>
-                <p>AppKEY: {{ item.secret }}</p>
                 {% if item.platform_type | int == 2 %}
                   <p class="apns-wrapper">
                     {% if item.apns.sandbox_key_utime | int == 0 %}

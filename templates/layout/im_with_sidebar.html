@@ -9,18 +9,8 @@
         </li>
         <li class="arrow"><span>&gt;</span></li>
         <li class="active">
-          <input id="client_id" name="" type="hidden" value="{{ data.client }}"/>
           <input name="" type="hidden" id="game_id" value="{{ data.game }}"/>
           <span id="game_name">{{data.appname}}</span>
-        </li>
-        <li class="arrow"><span>&gt;</span></li>
-        <li class="active">
-          <input name="" type="hidden" id="platform" value="{{ data.platform }}"/>
-          {% if data.platform | int == 1 %}
-            <span>Android</span>
-          {% elif data.platform | int == 2 %}
-            <span>iOS</span>
-          {% endif %}
         </li>
       </ol>
     </div>
@@ -37,7 +27,7 @@
             <span>应用信息</span> </div>
           <ul class="sub-ul">
             <li {% if g.uri_path.startswith('/im/game/detail/') %} class="actived" {%endif%}>
-              <a href="/im/game/detail/{{data.game}}?game={{data.game}}&platform={{data.platform}}&client={{data.client}}&name={{data.appname}}">应用详情</a>
+              <a href="/im/game/detail/{{data.game}}?game={{data.game}}&name={{data.appname}}">应用详情</a>
             </li>
           </ul>
         </li>

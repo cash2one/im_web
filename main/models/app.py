@@ -4,8 +4,6 @@
 from config import MYSQL_GC
 from ..god import God
 from ..core import ObjectType, PlatformType, MainException
-from utils.func import random_ascii_string
-
 
 class App(God):
     _db = MYSQL_GC
@@ -15,16 +13,11 @@ class App(God):
 
     _fields = (
         'id',
-        'name',
-        'developer_id',
-        'ctime',
-        'type',
-        'major_category_id',
-        'minor_category_id',
-        'intro',
-        'icon_src',
-        'pub_key',
-        'app_type'
+        'name',  # 名称
+        'developer_id',  # 开发者ID
+        'ctime',  # 创建时间
+        'key',  # app key
+        'secret'  # app secret
     )
 
     _collections = ('clients', )
@@ -52,7 +45,6 @@ class App(God):
                 client_obj.init()
                 client_obj.is_active = 0
                 client_obj.developer_id = self.developer_id
-                client_obj.secret = random_ascii_string(32)
 
             client_kvs[platform_type] = client_obj
 
@@ -63,16 +55,13 @@ class App(God):
                 raise MainException.CLIENT_INVALID_PLATFORM_TYPE
 
             client_obj.platform_identity = row.get('platform_identity')
-            client_obj.is_active = 1 if client_obj.platform_identity else 0
+            client_obj.is_active = row.get('is_active')
 
         clients = client_kvs.values()
 
         active_count = 0
         for client_obj in clients:
             active_count += client_obj.is_active
-
-        print clients
-        print active_count
 
         result = []
         if not active_count:
@@ -87,14 +76,13 @@ class App(God):
                 c = {'platform_type': client_obj.platform_type,
                      'platform_identity': client_obj.platform_identity,
                      'is_active': client_obj.is_active,
-                     'id': client_obj.get_id(),
-                     'secret': client_obj.secret}
+                     'id': client_obj.get_id()
+                     }
                 if client_obj.platform_type == PlatformType.ANDROID:
                     c['certificate'] = client_obj.get_certificate_url()
                 result.append(c)
 
         self.clients = result
-
 
     def set_clients(self, val):
         return val
@@ -110,8 +98,8 @@ class App(God):
                 client_kvs[client['platform_type']] = {'platform_type': client.platform_type,
                                                        'platform_identity': client.platform_identity,
                                                        'is_active': client.is_active,
-                                                       'id': client.get_id(),
-                                                       'secret': client.secret}
+                                                       'id': client.get_id()
+                                                       }
 
                 if client.platform_type == PlatformType.IOS:
                     apns = client.fetch_apns()

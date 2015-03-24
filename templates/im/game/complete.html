@@ -1,4 +1,4 @@
-{% extends "outer_template.html" %}
+{% extends "layout/im.html" %}
 
 {% block breadcrumb %}
   <div class="breadcrumb">
@@ -20,28 +20,13 @@
   <div class="game-form">
     <div class="center-section">
       <div class="form-1">
-        <div class="{% if data['game']['clients'][0]['is_active'] == 1 and data['game']['clients'][1]['is_active'] == 1 %}complete-wrapper{% else %}complete-wrapper complete-one{% endif %}">
+        <div class="complete-wrapper complete-one">
           <h2 class="create-complete"><i></i>应用创建成功</h2>
           <div class="item">
-            <h3><i></i>{{data['game']['name'] }} APPID/APPKEY信息如下</h3>
-            <div class="platform-wrapper clearfix">
-              {% if data.game %}
-              {% for item in data['game']['clients'] %}
-              {% if item.is_active == 1 %}
-              {% if item.platform_type == 1 %}
-              <div class="platform-item android">
-                <h4>Android:</h4>
-                {% elif item.platform_type == 2 %}
-                <div class="platform-item ios">
-                  <h4>iOS:</h4>
-                  {% endif %}
-                  <p>AppID: {{item.id}}</p>
-                  <p>AppKEY: {{item.secret}}</p>
-                </div>
-                {% endif %}
-                {% endfor %}
-                {% endif %}
-              </div>
+            <h3><i></i>{{data['game']['name'] }} 接入信息如下</h3>
+            <p class="info">App     ID: {{data['game']['id'] }}</p>
+            <p class="info">App    Key: {{data['game']['key'] }}</p>
+            <p class="info">App Secret: {{data['game']['secret'] }}</p>
             </div>
             <div class="item">
               <h3><i></i>接入文档</h3>
@@ -52,7 +37,6 @@
         </div>
       </div>
     </div>
-  </div>
 {% endblock %}
 
 {% block body %}

@@ -10,6 +10,7 @@ from main.models.app import App, Client
 from main.core import PlatformType
 from utils.certificate import Certificate
 from utils.crypt import Md5Utils
+from utils.func import random_ascii_string
 from main.god import And, Exp
 import os
 
@@ -50,7 +51,6 @@ def im_game_add():
     """
     data = {}
     data["game"] = {}
-    data["game"]['app_type'] = 1
     data["game"]["name"] = ""
     data["game"]["id"] = ""
     data["game"]["major_category"] = {}
@@ -75,8 +75,9 @@ def im_apps_add():
         app_obj.init()
         if app_obj.feed(developer_id=session['user']['id'],
                         name=request.form.get('name'),
-                        intro=request.form.get('intro', ''),
-                        icon_src=request.form.get('icon_src', '')):
+                        key=random_ascii_string(32),
+                        secret=random_ascii_string(32)
+                        ):
 
             clients = _get_clients()
 
@@ -102,8 +103,7 @@ def im_apps_add():
                 client_obj = Client().set_id(android_client_id)
                 client_obj.set_certificate(pkey, cer)
 
-            app_obj['clients'] = app_obj.get_clients()
-            return render_template('im/game/complete.html', data={'game': app_obj})
+            return redirect(url_for('.im_game_complete', game_id=app_obj.id))
     return redirect(url_for('.im_game_add'))
 
 
@@ -147,7 +147,7 @@ def download(path):
 
     data = str(client_id) + "," + str(cer_type) + "," + str(request_time)
 
-    if not Md5Utils.verify(data, sign, client_obj.secret):
+    if not Md5Utils.verify(data, sign, client_obj.ctime):
         abort(403)
 
     cer = client_obj.fetch_certificate()
@@ -182,12 +182,27 @@ def im_game_edit(game_id):
 
 def push_common():
     g.uri_path = request.path
-    client = request.args.get('client', '')
     game = request.args.get('game', '')
     name = request.args.get('name', '')
-    platform = request.args.get('platform', '')
-    return {'game': game, 'platform': platform, 'appname': name, 'client': client}
+    return {'game': game, 'appname': name}
 
+
+@web.route('/im/game/complete/<int:game_id>')
+@_im_login_required
+def im_game_complete(game_id):
+    """
+    游戏创建完成
+    """
+    data = push_common()
+    g.uri_path = request.path
+    offset = request.args.get('offset', 0)
+    if game_id:
+        data['game'] = _get_app(game_id).present()
+        data['offset'] = offset
+        # print data
+        return render_template('im/game/complete.html', data=data)
+    else:
+        abort(404)
 
 @web.route('/im/game/detail/<int:game_id>')
 @_im_login_required
@@ -214,8 +229,6 @@ def _get_app(app_id):
         abort(404)
 
     app_obj = app_arr[0]
-    # from config import PUBLIC_KEY
-    # result['platform_pub_key'] = PUBLIC_KEY
     return app_obj
 
 
