@@ -1,0 +1,14 @@
+{% extends "index/base.html" %}
+
+{% block body %}
+<div class="inner cover">
+    <h1 class="cover-heading">gobelieve即时通讯</h1>
+
+    <p class="lead">gobelieve即时通讯提供更稳定可靠的即时通讯云服务，并承诺全面开源与深度安全 不用自建服务器，不用自己开发，加几行代码轻松拥有IM功能。我们提供 iOS / Android / Javascript 等多平台的原生
+        SDK，几分钟简单集成，即可拥有一个成熟、稳定的后端系统。大幅降低你的开发和运维成本，助你打造更好的用户体验，在市场竞争中快人一步。</p>
+
+    <p class="lead">
+        <a href="{{ url_for('web.im_index') }}" class="btn btn-lg btn-default">详情</a>
+    </p>
+</div>
+{% endblock %}

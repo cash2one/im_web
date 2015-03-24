@@ -1,0 +1,7 @@
+{% extends "index/base.html" %}
+{% block title %}Page Not Found{% endblock %}
+{% block body %}
+  <h1>出现错误</h1>
+  <p>{{ description }}
+  <p><a href="{{ url_for('web.index') }}">点击返回</a>
+{% endblock %}

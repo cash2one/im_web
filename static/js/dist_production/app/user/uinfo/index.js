@@ -1,0 +1,1 @@
+define("dist/app/user/uinfo/index",["$","helper"],function(a){var b=a("$");a("helper"),b(function(){})});

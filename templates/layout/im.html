@@ -1,0 +1,18 @@
+{% extends "outer_template.html" %}
+
+{% block logo %}
+  <div class="im-logo"><a href="{{ url_for('web.index') }}">NGDS</a></div>
+{% endblock %}
+
+{% block custom_logout %}
+  <li><a href="{{ url_for('web.logout', redirect_url=url_for('web.im_index')) }}">注销</a></li>
+{% endblock %}
+
+{% block nav_inner %}
+  <ul>
+    <li class="item {% if g.uri_path.startswith('/im') %}curr{% endif %}">
+      <a class="link" href="/im">我的应用</a>
+    </li>
+    <li class="item"><a class="link" target="_blank" href="{{ url_for('web.doc') }}">文档中心</a></li>
+  </ul>
+{% endblock %}
