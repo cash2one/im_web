@@ -76,14 +76,14 @@ class Account(God):
             url = email_cb + code
 
         try:
-            mail.send_message("新游开发者平台邮箱验证",
+            mail.send_message("GoBelieve开发者平台邮箱验证",
                               recipients=[self.email],
-                              html="感谢注册新游开发者平台，使用新游开发者服务。<br/>"
-                                   "请点击以下按钮进行邮箱验证，以便您正常使用新游开发者平台的更多功能：<br/>"
+                              html="感谢注册GoBelieve开发者平台，使用GoBelieve开发者服务。<br/>"
+                                   "请点击以下按钮进行邮箱验证，以便您正常使用GoBelieve开发者平台的更多功能：<br/>"
                                    "<a href=\"{url}\">马上验证邮箱</a> <br/>"
                                    "如果您无法点击以上链接，请复制以下网址到浏览器里直接打开：<br/>"
                                    "{url} <br/>"
-                                   "如果您并未申请新游开发者平台的相关服务，可能是其他用户误输入了您的邮箱地址。请忽略此邮件。".format(url=url))
+                                   "如果您并未申请GoBelieve开发者平台的相关服务，可能是其他用户误输入了您的邮箱地址。请忽略此邮件。".format(url=url))
         except Exception, e:
             logging.exception(e)
 
@@ -102,11 +102,11 @@ class Account(God):
         else:
             url = email_cb + code
         try:
-            mail.send_message("新游开发者平台密码重置",
+            mail.send_message("GoBelieve开发者平台密码重置",
                               recipients=[self.email],
-                              html="本邮件是应您在新游开发者平台上提交的重置密码请求，从而发到您邮箱的重置密码的邮件。<br/>"
+                              html="本邮件是应您在GoBelieve开发者平台上提交的重置密码请求，从而发到您邮箱的重置密码的邮件。<br/>"
                                    "如果您没有提交重置密码请求而收到此邮件，我们非常抱歉打扰您，请忽略本邮件。<br/>"
-                                   "要重置您在新游开发者平台上的用户密码，请点击以下链接：<br/>"
+                                   "要重置您在GoBelieve开发者平台上的用户密码，请点击以下链接：<br/>"
                                    "<a href=\"{url}\">密码重置</a> <br/>"
                                    "该链接会在浏览器上打开一个页面，让您来重设密码。如果无法点击请复制到浏览器地址栏里：<br/>"
                                    "{url} <br/>"
