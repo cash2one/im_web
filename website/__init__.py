@@ -13,7 +13,7 @@ LOGGER = init_logger(__name__)
 
 def http_error_handler(err):
     LOGGER.error(err)
-    return render_template('error.html', description=str(err)), err.code
+    return render_template('error.html', description=str(err))
 
 
 def response_meta_handler(response_meta):
