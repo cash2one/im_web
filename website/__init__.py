@@ -12,7 +12,8 @@ LOGGER = init_logger(__name__)
 
 
 def http_error_handler(err):
-    return render_template('error.html', description=err.description), err.code
+    LOGGER.error(err)
+    return render_template('error.html', description=str(err)), err.code
 
 
 def response_meta_handler(response_meta):
