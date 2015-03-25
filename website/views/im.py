@@ -147,7 +147,7 @@ def download(path):
 
     data = str(client_id) + "," + str(cer_type) + "," + str(request_time)
 
-    if not Md5Utils.verify(data, sign, client_obj.ctime):
+    if not Md5Utils.verify(data, sign, str(client_obj.ctime)):
         abort(403)
 
     cer = client_obj.fetch_certificate()
