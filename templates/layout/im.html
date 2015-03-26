@@ -11,7 +11,7 @@
 {% block nav_inner %}
   <ul>
     <li class="item {% if g.uri_path.startswith('/im') %}curr{% endif %}">
-      <a class="link" href="/im">我的应用</a>
+      <a class="link" href="{{ url_for('web.im_index') }}">我的应用</a>
     </li>
     <li class="item"><a class="link" target="_blank" href="{{ url_for('web.doc') }}">文档中心</a></li>
   </ul>

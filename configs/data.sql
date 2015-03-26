@@ -4,7 +4,7 @@ REPLACE INTO `_object` (`id`, `type`)
 VALUES (7, 5), (8, 6), (9, 6), (10, 2), (17, 5), (18, 6), (19, 6);
 
 REPLACE INTO `account` (`id`, `name`, `email`, `email_removed`, `email_checked`, `password`, `ctime`, `role`, `mobile_zone`, `mobile`)
-VALUES (10, '开发商账号', 'biohfj@gmail.com', '', 1, 'pbkdf2:sha1:1000$brLwvV1C$1ce07023f7d2c88131c5749f224b8de7cdac5ae6',
+VALUES (10, '演示账号', 'demo@gobelieve.io', '', 1, 'pbkdf2:sha1:1000$brLwvV1C$1ce07023f7d2c88131c5749f224b8de7cdac5ae6',
         1403633136, 1, '', '');
 
 REPLACE INTO `app` (`id`, `name`, `developer_id`, `ctime`, `key`, `secret`)

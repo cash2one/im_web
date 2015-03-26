@@ -28,13 +28,13 @@ class Mail(_Mail):
     @classmethod
     def init_app(cls, app):
         state = cls(
-            app.config.get('MAIL_SERVER', 'smtp.exmail.qq.com'),
-            app.config.get('MAIL_USERNAME', 'webmaster@gameservice.com'),
-            app.config.get('MAIL_PASSWORD', 'ngpassw0rd'),
-            app.config.get('MAIL_PORT', 465),
-            app.config.get('MAIL_USE_TLS', False),
-            app.config.get('MAIL_USE_SSL', True),
-            app.config.get('MAIL_DEFAULT_SENDER', 'webmaster@gameservice.com'),
+            app.config.get('MAIL_SERVER'),
+            app.config.get('MAIL_USERNAME'),
+            app.config.get('MAIL_PASSWORD'),
+            app.config.get('MAIL_PORT'),
+            app.config.get('MAIL_USE_TLS'),
+            app.config.get('MAIL_USE_SSL'),
+            app.config.get('MAIL_DEFAULT_SENDER'),
             int(app.config.get('MAIL_DEBUG', app.debug)),
             app.config.get('MAIL_MAX_EMAILS'),
             app.config.get('MAIL_SUPPRESS_SEND', app.testing))

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, render_template, send_from_directory
+from flask import Blueprint, render_template, send_from_directory, redirect, url_for
 import os
 from utils.func import init_logger
 
@@ -33,25 +33,12 @@ def index():
 def contact():
     return render_template('index/contact.html')
 
+
 @web.route('/price')
 def price():
     return render_template('index/price.html')
 
-@web.route('/doc')
+
+@web.route('/docs')
 def doc():
-    return '文档中心'
-
-
-@web.route('/about')
-def about():
-    return '关于我们'
-
-
-@web.route('/agreement')
-def agreement():
-    return '服务协议'
-
-
-@web.route('/sdk')
-def sdk():
-    return 'SDK下载'
+    return redirect(url_for('web.static', filename='docs/Server.html'))

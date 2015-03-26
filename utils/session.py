@@ -1,17 +1,3 @@
-"""
-SESSION_COOKIE_NAME = 'sid_dev'
-SESSION_COOKIE_DOMAIN = 'dev.developers.gameservice.com'
-SESSION_COOKIE_PATH = '/'
-SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SECURE = False
-PERMANENT_SESSION_LIFETIME = 7200
-
-SESSION_KEY_PREFIX = 'session:gameservice:developers:'
-SESSION_REDIS_HOST = '127.0.0.1'
-SESSION_REDIS_PORT = 6379
-SESSION_REDIS_DB = 0
-SESSION_REDIS_PASSWORD = None
-"""
 import pickle
 from uuid import uuid4
 from redis import Redis
