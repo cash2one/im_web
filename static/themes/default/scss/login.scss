@@ -23,9 +23,10 @@ a {
     .opt {
         a {
             display: inline;
-            color: #7e8495;
+            color: #eee;
             text-decoration: none;
-            line-height: 99px;
+            line-height: 64px;
+            font-size: 16px;
             padding: 0 3px;
             &:hover {
                 color: #fff;
@@ -113,8 +114,7 @@ a {
 .process-bar {
     padding-top: 30px;
     .process-wrapper {
-        width: 1183px;
-        height: 242px;
+        text-align: center;
     }
 }
 .valid-wrapper {

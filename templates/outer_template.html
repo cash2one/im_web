@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>gobelieve即时通讯</title>
@@ -11,7 +11,7 @@
     <div class="header">
       <div class="inner-wrapper">
         {% block logo %}
-          <div class="logo"><a href="{{ url_for('web.index') }}">GoBelieve</a></div>
+          <div class="logo"><a href="{{ url_for('web.index') }}">GoBelieve开发者中心</a></div>
         {% endblock %}
         <div class="nav">
           {% block nav_inner %}
@@ -41,15 +41,6 @@
     {% block body %}{% endblock %}
     <div class="footer">
         <div class="inner-wrapper">
-            <div class="link-wrapper">
-                <ul>
-                    <li><a href="{{ url_for('web.about') }}" target="_blank">关于GoBelieve</a></li>
-                    <li class="line"><span>|</span></li>
-                    <li><a href="{{ url_for('web.contact') }}" target="_blank">联系方式</a></li>
-                    <li class="line"><span>|</span></li>
-                    <li><a href="{{ url_for('web.agreement') }}" target="_blank">服务协议</a></li>
-                </ul>
-            </div>
             <p class="copyright">&copy; gobelieve.io. All Rights Reserved.</p>
         </div>
     </div>
