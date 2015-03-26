@@ -206,7 +206,7 @@ class RSAUtils(object):
 class Md5Utils(object):
     @classmethod
     def sign(cls, data, key):
-        return hashlib.md5(data + key).hexdigest()
+        return hashlib.md5(str(data) + str(key)).hexdigest()
 
     @classmethod
     def verify(cls, data, sign, key):
