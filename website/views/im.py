@@ -117,9 +117,8 @@ def im_apps_edit(app_id):
 
     app_obj = _get_app(app_id)
     app_obj.feed(developer_id=session['user']['id'],
-                 name=request.form.get('name'),
-                 intro=request.form.get('intro', ''),
-                 icon_src=request.form.get('icon_src', ''))
+                 name=request.form.get('name')
+                 )
 
     clients = _get_clients()
 
