@@ -24,7 +24,7 @@
     </div>
     <div class="out-link">
         <a href="{{ url_for('web.static', filename='docs/Server.html',_external=true) }}" class="btn btn-default btn-large">开发文档</a>
-        <a href="#" class="btn btn-default btn-large">SDK&Demo下载</a>
+        <a href="{{ url_for('web.static', filename='file/sdk_demo.zip',_external=true) }}" target="_blank" class="btn btn-default btn-large">SDK&Demo下载</a>
         <a href="{{ url_for('web.im_index',_external=true) }}" class="btn btn-default btn-large">申请接入</a>
     </div>
 {% endblock %}
