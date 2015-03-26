@@ -1,0 +1,278 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-size: 16px;
+    -ms-word-break: break-all;
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    background-color: #eee;
+    color: #747f8c;
+    font-family: "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
+}
+
+a {
+    color: #51aded;
+    text-decoration: none;
+    &:hover {
+        color: #51aded;
+        text-decoration: none;
+    }
+}
+
+li {
+    list-style: none;
+}
+
+.container {
+    width: 940px;
+    padding: 0 10px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.header {
+    height: 64px;
+    background-color: #fff;
+    h1 {
+        font-size: 16px;
+        line-height: 64px;
+        font-weight: 400;
+        color: #888;
+        strong {
+            font-size: 42px;
+            color: #4cae4c;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+    }
+    .menu {
+        position: absolute;
+        right: 0;
+        top: 0;
+        line-height: 64px;
+        font-size: 16px;
+        li {
+            display: inline-block;
+            padding: 0 20px;
+        }
+        a {
+            color: #888;
+        }
+        .btn-default{
+            margin-right: 10px;
+        }
+    }
+
+}
+
+.main {
+    .bg-wrap {
+        height: 500px;
+        background: url(../images/bg.jpg) no-repeat center;
+    }
+    .banner-wrap {
+        color: #fff;
+        text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+        padding-top: 150px;
+        position: relative;
+        h1 {
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #c3e54b;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        h3 {
+            color: #eee;
+            font-weight: 400;
+            font-size: 18px;
+        }
+        .hot {
+            position: absolute;
+            right: 0;
+            top: 0;
+            img {
+                width: 400px;
+            }
+        }
+    }
+    .out-link {
+        text-align: center;
+        padding-top: 50px;
+        .btn {
+            margin: 0 30px;
+        }
+    }
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    &.btn-default {
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+        &:hover {
+            background-color: #5cb85c;;
+            border-color: #4cae4c;
+            color: #fff;
+        }
+    }
+    &.btn-large {
+        padding: 12px 24px;
+        font-size: 20px;
+    }
+    &.btn-primary {
+        background-color: #5cb85c;;
+        border-color: #4cae4c;
+        color: #fff!important;
+        &:hover {
+            background-color: #5cb85c;;
+            border-color: #4cae4c;
+            color: #fff;
+        }
+    }
+}
+
+.footer {
+    .copyright {
+        margin-top: 100px;
+        text-align: center;
+        line-height: 42px;
+        color: #888;
+    }
+}
+
+.main {
+    position: relative;
+}
+
+.bg-1 {
+    position: relative;
+    &::before {
+        //        position: absolute;
+        //        background-color: #333c4a;
+        //        width: 100%;
+        //        height: 300px;
+        //        content: '';
+        //        -webkit-animation: bar-slide 0.2s cubic-bezier(0.1, 0.82, 0.25, 1);
+        //        animation: bar-slide 0.2s cubic-bezier(0.1, 0.82, 0.25, 1);
+        //        top: 0;
+        //        left: 0;
+    }
+}
+
+.price {
+    position: relative;
+    padding-top: 30px;
+    z-index: 2;
+    h2 {
+        color: #000;
+        text-align: center;
+        line-height: 40px;
+        padding-top: 20px;
+        font-weight: 400;
+    }
+    .free {
+        color: #555;
+        font-size: 16px;
+        line-height: 42px;
+        text-align: center;
+    }
+    .item-wrap {
+        padding-top: 30px;
+    }
+    .item {
+        background-color: #ffffff;
+        display: inline-block;
+        width: 285px;
+        margin: 0 5px;
+        border: 1px solid #ddd;
+        box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.3);
+        h3 {
+            background-color: #4fceae;
+            height: 80px;
+            line-height: 80px;
+            color: #fff;
+            font-weight: 400;
+            font-size: 28px;
+            text-align: center;
+        }
+        .service-list {
+            margin: 0 10px;
+            border-left: 1px solid #e9e9e9;
+            border-right: 1px solid #e9e9e9;
+            background-color: #f2f2f2;
+            li {
+                line-height: 46px;
+                text-align: center;
+                border-bottom: 1px solid #e9e9e9;
+                color: #555;
+            }
+        }
+        .s {
+            padding: 20px 0 20px 0;
+        }
+        .amount {
+            font-size: 32px;
+            text-align: center;
+            color: #000;
+            line-height: 60px;
+        }
+        .unit {
+            color: #888;
+            text-align: center;
+            font-size: 16px;
+            line-height: 32px;
+        }
+        &.item-2 {
+            h3 {
+                background-color: #eb5767;
+            }
+        }
+        &.item-3 {
+            h3 {
+                background-color: #56c1e7;
+            }
+        }
+    }
+}
+
+.contact {
+    padding: 40px 0;
+    text-align: center;
+    width: 600px;
+    margin: 100px auto;
+    background-color: #fff;
+    outline: medium none;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+    color: rgb(102, 102, 102);
+    h1 {
+        line-height: 50px;
+    }
+    p {
+        line-height: 42px;
+    }
+}
