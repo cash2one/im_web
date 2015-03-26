@@ -1,14 +1,30 @@
 {% extends "index/base.html" %}
 
 {% block body %}
-<div class="inner cover">
-    <h1 class="cover-heading">gobelieve即时通讯</h1>
+  <div class="bg-wrap">
+        <div class="container">
+            <div class="banner-wrap">
+                <h1>极简的API设计，轻松接入sdk</h1>
 
-    <p class="lead">gobelieve即时通讯提供更稳定可靠的即时通讯云服务，并承诺全面开源与深度安全 不用自建服务器，不用自己开发，加几行代码轻松拥有IM功能。我们提供 iOS / Android / Javascript 等多平台的原生
-        SDK，几分钟简单集成，即可拥有一个成熟、稳定的后端系统。大幅降低你的开发和运维成本，助你打造更好的用户体验，在市场竞争中快人一步。</p>
+                <h2>
+                    个人聊天，群组聊天<br/>
+                    文字，图片，语音
+                </h2>
 
-    <p class="lead">
-        <a href="{{ url_for('web.im_index') }}" class="btn btn-lg btn-default">详情</a>
-    </p>
-</div>
+                <h3>
+                    开源代码，提供无限定制的可能性<br/>
+                    可以为企业提供单独部署服务器，定制功能
+                </h3>
+
+                <div class="hot">
+                    <img src="{{ url_for('web.static', filename='themes/default/images/im.png',_external=true) }}" title="最少的移动IM" alt="最少的移动IM"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="out-link">
+        <a href="{{ url_for('web.static', filename='docs/Server.html',_external=true) }}" class="btn btn-default btn-large">开发文档</a>
+        <a href="#" class="btn btn-default btn-large">SDK&Demo下载</a>
+        <a href="{{ url_for('web.im_index',_external=true) }}" class="btn btn-default btn-large">申请接入</a>
+    </div>
 {% endblock %}

@@ -2,7 +2,7 @@
 """
 config必须配置
 OBJECT_ID_WIDTH = 10 ** 13
-MYSQL = ('172.25.1.111', 3306, 'ngds_user', 'ngds_user.mysql', 'game_center', True, 'utf8')
+MYSQL = ('172.25.1.111', 3306, 'GoBelieve_user', 'GoBelieve_user.mysql', 'game_center', True, 'utf8')
 """
 from flask import g
 from functools import partial

@@ -1,21 +1,23 @@
 // frame
 //----------------------------------------------------- 
-$headerHeight:          99px !default;
-$headerBackground:      #424242 !default;
+$headerHeight: 99px !default;
+$headerBackground: #424242 !default;
 
 // hd-nav
 //----------------------------------------------------- 
-$hdLinkColor:           #7e8495 !default;
+$hdLinkColor: #7e8495 !default;
 
 body {
     overflow-x: hidden;
     background-color: #f0f2f4;
 }
+
 .inner-wrapper {
     width: 1180px;
     margin: 0 auto;
     position: relative;
 }
+
 %header {
     height: $headerHeight;
     background-color: $headerBackground;
@@ -23,22 +25,30 @@ body {
         float: left;
         a {
             display: block;
-            text-indent: -9999px;
             width: 211px;
             height: 99px;
-            background: url('../images/logo.png') scroll 0 25px no-repeat;
+            font-size: 42px;
+            color: #fff;
+            font-weight: 700;
+            margin-right: 10px;
+            padding-top: 15px;
+            //            background: url('../images/logo.png') scroll 0 25px no-repeat;
+            &:hover{
+                text-decoration: none;
+            }
         }
     }
-    .push-dev-logo a {
-      background: url('../images/logo/push-dev.png') scroll 0 30px no-repeat;
-    }
-    .common-logo a {
-      background: url('../images/logo/common.png') scroll 0 25px no-repeat;
-    }
-    .im-logo a {
-      background: url('../images/im-logo.png') scroll 0 15px no-repeat;
-    }
+    //    .push-dev-logo a {
+    //      background: url('../images/logo/push-dev.png') scroll 0 30px no-repeat;
+    //    }
+    //    .common-logo a {
+    //      background: url('../images/logo/common.png') scroll 0 25px no-repeat;
+    //    }
+    //    .im-logo a {
+    //      background: url('../images/im-logo.png') scroll 0 15px no-repeat;
+    //    }
 }
+
 %hd-nav {
     margin-left: 100px;
     position: relative;
@@ -63,6 +73,7 @@ body {
         }
     }
 }
+
 %hd-list {
     position: relative;
     padding: 7px 10px 7px 15px;
@@ -73,18 +84,19 @@ body {
     color: #444;
     cursor: pointer;
 }
+
 %sub-nav {
     @include clearfix;
     background-color: #e5e6e8;
     height: 60px;
-    ul{
+    ul {
         @include clearfix;
-        li{
+        li {
             float: left;
             margin: 0 80px 0 0;
             height: 57px;
             border-bottom: 3px solid #e5e6e8;
-            a{
+            a {
                 font-size: 16px;
                 display: block;
                 line-height: 60px;
@@ -96,15 +108,17 @@ body {
                     text-decoration: none;
                 }
             }
-            &.curr, &:hover{
+            &.curr, &:hover {
                 border-bottom: 3px solid #76c7fe;
             }
         }
     }
 }
+
 .sub-nav {
     @extend %sub-nav;
 }
+
 .footer {
     background-color: #e2e5e7;
     padding: 40px 0;

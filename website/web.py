@@ -33,6 +33,9 @@ def index():
 def contact():
     return render_template('index/contact.html')
 
+@web.route('/price')
+def price():
+    return render_template('index/price.html')
 
 @web.route('/doc')
 def doc():
