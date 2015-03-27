@@ -52,7 +52,7 @@ LOG_DIR = os.path.join(APP_ROOT, '.logs')
 
 SENTRY_DSN = ''
 
-APP_MODE = 'Development'
+APP_MODE = 'Production'
 
 TOKEN_SALT = '20140606'
 
