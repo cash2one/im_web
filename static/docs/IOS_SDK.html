@@ -179,7 +179,11 @@
 <ul>
 <li>除了imsdk必要的初始化动作外，使用imkit需要初始化存储类</li>
 </ul>
-<pre><code>    [IMService instance].peerMessageHandler = [PeerMessageHandler instance];
+<pre><code>    //setDBPath必须要在引用PeerMessageHandler，GroupMessageHandler之前调用
+    //可以将当前登录的uid加入到路径中，这样不同用户登录的时候，可以保留前一个用户的聊天历史
+    [MessageDB setDBPath:path];
+    [IMService instance].peerMessageHandler = [PeerMessageHandler instance];
+    [IMService instance].groupMessageHandler = [GroupMessageHandler instance];
 </code></pre><h2 id="-">打开聊天界面</h2>
 <pre><code>MessageViewController* msgController = [[MessageViewController alloc] init];
 msgController.peerUID = peerUID;

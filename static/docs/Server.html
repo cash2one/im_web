@@ -82,10 +82,10 @@
 <h3 id="-">第三方服务端授权</h3>
 <ul>
 <li>请求地址: 所有可供第三方服务端访问的接口</li>
-<li>请求头部: Authorization: Basic xxx  //xxx 为 &quot;<client_id>:<client_secret>&quot;字符串的base64编码（编码后的字符串不能含有\n）</li>
+<li>请求头部: Authorization: Basic $base64(appid:appsecret)</li>
 </ul>
 <h3 id="-">客户端授权</h3>
-<p>-请求头部: Authorization: Bearer xxx  //xxx 为 access token</p>
+<p>-请求头部: Authorization: Bearer $accesstoken</p>
 <h3 id="-access-token">第三方应用获取永久有效的access token</h3>
 <ul>
 <li>请求地址：<strong> POST /auth/grant</strong></li>
