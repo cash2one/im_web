@@ -119,7 +119,7 @@ class Client(God):
                                              port=config.REDIS_DATA_PORT,
                                              db=config.REDIS_DATA_DB,
                                              password=config.REDIS_DATA_PASSWORD)
-                chan_rds.publish("apns_update_p12_channel", self.get_id())
+                chan_rds.publish("apns_update_p12_channel", self.app_id)
 
                 return {
                     'client_id': self.get_id(),
