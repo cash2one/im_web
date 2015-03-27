@@ -94,7 +94,7 @@ def im_apps_add():
                     android_client_id = clt['id']
 
             # 更新apns证书
-            _update_apns(ios_client_id, clients)
+            _update_apns(ios_client_id, clients, app_obj.id)
 
             if android_client_id is not None:
                 crypto = Certificate(CA_KEY, CA_CER)
@@ -250,7 +250,7 @@ def _get_clients():
     return clients
 
 
-def _update_apns(ios_client_id, clients):
+def _update_apns(ios_client_id, clients, app_id):
     if ios_client_id is not None:
         for clt in clients:
             if int(clt['platform_type']) == PlatformType.IOS:
@@ -285,4 +285,6 @@ def _update_apns(ios_client_id, clients):
                     production_key_secret = None
 
                 client_obj = Client().set_id(ios_client_id)
+                client_obj.feed(app_id=app_id)
+
                 client_obj.set_apns(sandbox_key, sandbox_key_secret, production_key, production_key_secret)
