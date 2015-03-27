@@ -84,13 +84,13 @@ a {
             position: relative;
             a.link {
                 color: #79c9ff;
-                padding-right: 20px;
+                padding-right: 25px;
                 position: relative;
                 &:hover {
                     color: #79c9ff;
                     .caret {
                         position: absolute;
-                        top: 48px;
+                        top: 34px;
                         *top: 5px;
                         right: 7px;
                     }
@@ -98,7 +98,7 @@ a {
             }
             .caret {
                 position: absolute;
-                top: 48px;
+                top: 34px;
                 *top: 5px;
                 right: 7px;
                 border-top-color: #9f9f9f;
@@ -781,6 +781,12 @@ a {
     padding-bottom: 50px;
     width: 960px;
     margin: 0 auto;
+    &.complete-one{
+        width:auto;
+        .item{
+            padding-left: 200px;
+        }
+    }
     .create-complete {
         padding: 40px 20px 60px;
         line-height: 55px;
