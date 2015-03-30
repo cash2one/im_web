@@ -75,7 +75,7 @@ class TestPage(unittest.TestCase):
     def create_app(cls):
         app.config['DEBUG'] = False
         app.config['TESTING'] = True
-        # app.config['APP_MODE'] = 'Testing'
+        # app.config['APP_MODE'] = 'Development'
         # Default port is 5000
         app.config['LIVESERVER_PORT'] = 8943
         return app

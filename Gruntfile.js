@@ -1,16 +1,7 @@
 module.exports = function (grunt) {
 
     var staticFolderName = 'static';
-    var whichDeploy = 0;
-    var distFolder;
-    (function (n) {
-        var arr = [
-            'dist',
-            'dist_staging',
-            'dist_production'
-        ];
-        distFolder = arr[n];
-    })(whichDeploy);
+    var distFolder = 'dist';
 
     grunt.initConfig({
         // 代码检查
