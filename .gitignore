@@ -24,4 +24,3 @@ node_modules/
 .logs
 test.py
 config.py
-static/js/dist

@@ -1,7 +1,7 @@
 module.exports = function (grunt) {
 
     var staticFolderName = 'static';
-    var whichDeploy = 2;
+    var whichDeploy = 0;
     var distFolder;
     (function (n) {
         var arr = [
