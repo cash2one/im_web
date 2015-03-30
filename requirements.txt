@@ -11,3 +11,4 @@ markdown
 pyopenssl
 raven
 blinker
+selenium

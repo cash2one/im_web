@@ -133,7 +133,7 @@ def im_apps_edit(app_id):
     # 更新apns证书
     _update_apns(ios_client_id, clients, app_id)
 
-    return redirect(url_for('.im_game_detail', game_id=app_id))
+    return redirect(url_for('.im_game_detail', game_id=app_id, game=app_id, name=request.form.get('name')))
 
 
 @web.route('/im/download/<string:path>', methods=['GET'])
