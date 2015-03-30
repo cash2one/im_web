@@ -3,7 +3,7 @@ define(function(require, exports, module) {
     var search = loc.search;
 
     var local = 'localhost:8000/';
-    var remote = 'developers.gameservice.com/';
+    var remote = 'developer.gobelieve.io/';
 
     seajs.on('fetch', function(data) {
         if (data.uri) {
