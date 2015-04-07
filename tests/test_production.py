@@ -35,7 +35,7 @@ class TestPage(unittest.TestCase):
         Return the url of the test server
         """
         return 'http://%s%s%s' % (
-            HOST if HOST else 'localhost', ':' + cls.port if cls.port != 80 else '', '/' + path if path else '')
+            HOST if HOST else 'localhost', ':' + str(cls.port) if cls.port != 80 else '', '/' + path if path else '')
 
     def setUp(self):
         pass
@@ -61,7 +61,7 @@ class TestPage(unittest.TestCase):
         submit = driver.find_element_by_link_text(u'登录')
 
         # Fill the form with data
-        email.send_keys('biohfj@gmail.com')
+        email.send_keys('demo@gobelieve.io')
         password.send_keys('111111')
         # submitting the form
         submit.send_keys(Keys.RETURN)

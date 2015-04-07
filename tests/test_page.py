@@ -58,6 +58,8 @@ class TestPage(unittest.TestCase):
         time.sleep(1)
 
         cls.driver = webdriver.Firefox()
+        # https://sites.google.com/a/chromium.org/chromedriver/getting-started
+        # driver = webdriver.Chrome()
 
     @classmethod
     def tearDownClass(cls):
@@ -82,8 +84,6 @@ class TestPage(unittest.TestCase):
 
     def setUp(self):
         pass
-        # https://sites.google.com/a/chromium.org/chromedriver/getting-started
-        # driver = webdriver.Chrome('/path/to/chromedriver')  # Optional argument, if not specified will search path.
 
     def tearDown(self):
         pass
