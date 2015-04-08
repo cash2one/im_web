@@ -1,12 +1,12 @@
 <!doctype html>
 <!--[if lt IE 7]>
-<html class="no-js ie6 oldie"> <![endif]-->
+<html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>
-<html class="no-js ie7 oldie"> <![endif]-->
+<html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>
-<html class="no-js ie8 oldie"> <![endif]-->
+<html class="no-js ie8 oldie" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
+<html class="no-js" lang="en"> <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
     <title>文档中心</title>
@@ -30,16 +30,16 @@
     <div class="wrapper">
         <nav class="sidebar-nav">
             <div class="sidebar-content">
-                <!--<h1 class="nav-title">推送文档</h1>-->
+                <h1 class="nav-title">推送文档</h1>
                 <ul>
 
             <li  ><a href="./Android_SDK.html">Android开发文档</a><i class="disclosure"></i></li>
 
             <li  class="active"  ><a href="./IOS_SDK.html">IOS开发文档</a><i class="disclosure"></i></li>
 
-            <li  ><a href="JS_SDK.html">JS开发文档</a><i class="disclosure"></i></li>
+            <li  ><a href="./JS_SDK.html">JS开发文档</a><i class="disclosure"></i></li>
 
-            <li  ><a href="Server.html">服务器RestAPI文档</a><i class="disclosure"></i></li>
+            <li  ><a href="./Server.html">服务器RestAPI文档</a><i class="disclosure"></i></li>
 
 </ul>
 
@@ -54,12 +54,20 @@
 <h2 id="-">项目配置</h2>
 <ul>
 <li>在工程target的&quot;Build Settings&quot;中，找到&quot;Linking&quot;的&quot;Other Linker Flags&quot;，添加参数<code>-ObjC</code>。</li>
+<li>在Build Phases的Link Binary With Libraries中添加 libimsdk.a libimkit.a</li>
+<li>将imsdk和imkit的头文件加入到 User Header Search Paths中</li>
+<li>将imKitRes包含的资源文件加入到工程中</li>
 </ul>
 <h2 id="imsdk">IMSDK</h2>
 <ul>
 <li>imsdk只包含消息基础通讯功能</li>
 </ul>
-<h2 id="-im">初始化IM</h2>
+<h2 id="-">配置服务地址</h2>
+<pre><code>//app可以单独部署服务器，给予第三方应用更多的灵活性
+//在开发阶段也可以配置成测试环境的地址 &quot;sandbox.imnode.gobelieve.io&quot;, &quot;sandbox.api.gobelieve.io&quot;
+[IMHttpAPI instance].apiURL = @&quot;api.gobelieve.io&quot;
+[IMService instance].host = @&quot;imnode.gobelieve.io&quot;
+</code></pre><h2 id="-im">初始化IM</h2>
 <p>启动im服务只需要设置用户的access token，调用启动接口并添加消息的监听对象。</p>
 <pre><code>[IMService instance].deviceID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
 
@@ -179,7 +187,12 @@
 <ul>
 <li>除了imsdk必要的初始化动作外，使用imkit需要初始化存储类</li>
 </ul>
-<pre><code>    [IMService instance].peerMessageHandler = [PeerMessageHandler instance];
+<pre><code>    //setDBPath必须要在引用PeerMessageHandler，GroupMessageHandler之前调用
+    //设置的路径名中可以包含用户id，这样就可以同时保存多个用户的聊天历史
+    //否则用户注销后，必须要清空目录
+    [MessageDB setDBPath:path];
+    [IMService instance].peerMessageHandler = [PeerMessageHandler instance];
+    [IMService instance].groupMessageHandler = [GroupMessageHandler instance];
 </code></pre><h2 id="-">打开聊天界面</h2>
 <pre><code>MessageViewController* msgController = [[MessageViewController alloc] init];
 msgController.peerUID = peerUID;

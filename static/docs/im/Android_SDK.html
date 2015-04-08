@@ -1,12 +1,12 @@
 <!doctype html>
 <!--[if lt IE 7]>
-<html class="no-js ie6 oldie"> <![endif]-->
+<html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>
-<html class="no-js ie7 oldie"> <![endif]-->
+<html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>
-<html class="no-js ie8 oldie"> <![endif]-->
+<html class="no-js ie8 oldie" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
+<html class="no-js" lang="en"> <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
     <title>文档中心</title>
@@ -30,16 +30,16 @@
     <div class="wrapper">
         <nav class="sidebar-nav">
             <div class="sidebar-content">
-                <!--<h1 class="nav-title">推送文档</h1>-->
+                <h1 class="nav-title">推送文档</h1>
                 <ul>
 
             <li  class="active"  ><a href="./Android_SDK.html">Android开发文档</a><i class="disclosure"></i></li>
 
-            <li  ><a href="IOS_SDK.html">IOS开发文档</a><i class="disclosure"></i></li>
+            <li  ><a href="./IOS_SDK.html">IOS开发文档</a><i class="disclosure"></i></li>
 
-            <li  ><a href="JS_SDK.html">JS开发文档</a><i class="disclosure"></i></li>
+            <li  ><a href="./JS_SDK.html">JS开发文档</a><i class="disclosure"></i></li>
 
-            <li  ><a href="Server.html">服务器RestAPI文档</a><i class="disclosure"></i></li>
+            <li  ><a href="./Server.html">服务器RestAPI文档</a><i class="disclosure"></i></li>
 
 </ul>
 
@@ -55,6 +55,11 @@
 <ul>
 <li>目前SDK只支持Android 2.2或以上版本的手机系统。</li>
 </ul>
+<h2 id="-imsdk-imkit-android-studio-">将imsdk，imkit加入到android studio工程</h2>
+<ul>
+<li>打开菜单 File-&gt;New Module-&gt;Import .JAR or .AAR Package,分别导入imsdk.aar imkit.aar asynctcp.aar pushsdk.aar</li>
+<li>将 libasync_tcp.so 放到工程的libs目录下</li>
+</ul>
 <h2 id="androidmanifest-xml-">AndroidManifest.xml配置</h2>
 <ul>
 <li><p>以下配置可以在IMDemo/AndroidManifest.xml 找到并直接拷贝放置进自己的应用工程中的AndroidManifest.xml文件对应的tag中.</p>
@@ -62,6 +67,7 @@
 <li><p>manifest 标签下添加：</p>
 <pre><code> &lt;!-- 必需： 权限配置 --&gt;
  &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+ &lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&gt;
  &lt;uses-permission android:name=&quot;android.permission.BATTERY_STATS&quot; /&gt;
  &lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot; /&gt;
  &lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
@@ -74,18 +80,21 @@
  &lt;uses-permission android:name=&quot;android.permission.SYSTEM_ALERT_WINDOW&quot; /&gt;
  &lt;uses-permission android:name=&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot; /&gt;
  &lt;uses-permission android:name=&quot;android.permission.WAKE_LOCK&quot; /&gt;
+ &lt;uses-permission android:name=&quot;android.permission.MODIFY_AUDIO_SETTINGS&quot;/&gt;
 </code></pre></li>
 </ul>
-<ul>
+<pre><code>    &lt;uses-feature android:name=&quot;android.hardware.camera&quot; /&gt;
+    &lt;uses-feature android:name=&quot;android.hardware.camera.autofocus&quot; /&gt;
+</code></pre><ul>
 <li><p>application 标签下添加：</p>
 <pre><code> &lt;!-- 必需： 应用ID(此处的id为您申请的应用id) --&gt;
  &lt;meta-data
-     android:name=&quot;NGDS_APPID&quot;
-     android:value=&quot;11035&quot; /&gt;
+     android:name=&quot;GOBELIEVE_APPID&quot;
+     android:value=&quot;7&quot; /&gt;
 
  &lt;!-- 必需： 应用KEY (此处appkey为您申请的应用密钥)--&gt;
  &lt;meta-data
-     android:name=&quot;NGDS_APPKEY&quot;
+     android:name=&quot;GOBELIEVE_APPKEY&quot;
      android:value=&quot;HS5NVruwDJxFwUPEdzqo7gBrQCSFsIhA&quot; /&gt;
 
  &lt;!-- 必需： 推送页面配置 --&gt;
@@ -93,16 +102,16 @@
 
  &lt;!-- 必需： push 服务配置 --&gt;
  &lt;service
-     android:name=&quot;com.gameservice.sdk.push.v2.api.SmartPushService&quot;
-     android:process=&quot;:ngds&quot; /&gt;
+     android:name=&quot;com.beetle.push.PushService&quot;
+     android:process=&quot;:push&quot; /&gt;
 
  &lt;!-- 必需： push 消息接收配置 --&gt;
  &lt;receiver
-     android:name=&quot;com.gameservice.sdk.push.v2.api.SmartPushReceiver&quot;
+     android:name=&quot;com.beetle.push.PushReceiver&quot;
      android:enabled=&quot;true&quot;
      android:exported=&quot;false&quot;
      android:priority=&quot;90000&quot;
-     android:process=&quot;:ngds&quot;&gt;
+     android:process=&quot;:push&quot;&gt;
      &lt;intent-filter&gt;
          &lt;action android:name=&quot;android.intent.action.PACKAGE_ADDED&quot; /&gt;
          &lt;action android:name=&quot;android.intent.action.PACKAGE_CHANGED&quot; /&gt;
@@ -114,7 +123,6 @@
          &lt;action android:name=&quot;android.intent.action.USER_PRESENT&quot; /&gt;
          &lt;action android:name=&quot;android.net.conn.CONNECTIVITY_CHANGE&quot; /&gt;
          &lt;action android:name=&quot;android.intent.action.BOOT_COMPLETED&quot; /&gt;
-         &lt;action android:name=&quot;cn.ngds.android.intent.alarm&quot; /&gt;
      &lt;/intent-filter&gt;
  &lt;/receiver&gt;
 </code></pre></li>
@@ -123,32 +131,44 @@
 <ul>
 <li>imsdk只包含消息基础通讯功能</li>
 </ul>
-<h2 id="-im">初始化IM</h2>
+<h2 id="-">配置服务地址</h2>
 <ul>
-<li><p>在开始IM服务之前需要设置用户accessToken以及添加IMServiceObserver监听状态回调.</p>
-<pre><code>  //获取IMService
+<li><p>配置服务器地址是可选步骤,而且必须在Application对象的onCreate里面配置，否则配置无效</p>
+<pre><code>  //app可以单独部署服务器，给予第三方应用更多的灵活性
+  //在开发阶段也可以配置成测试环境的地址 &quot;sandbox.imnode.gobelieve.io&quot;, &quot;sandbox.api.gobelieve.io&quot;,
+  //&quot;sandbox.pushnode.gobelieve.io&quot;
+
   mIMService = IMService.getInstance();
-  String androidID = Settings.Secure.getString(this.getContentResolver(),
-      Settings.Secure.ANDROID_ID);
 
-  //设置设备唯一标识,用于多点登录时设备校验
-  mIMService.setDeviceID(androidID);
-  //注册回调
-  mIMService.addObserver(new IMServiceObserver() {
-
-  });
-  //监听网路状态变更
-  mIMService.registerConnectivityChangeReceiver(getApplicationContext());
-
-  //设置推送服务的回调
-  Push.registerReceiver(new IMsgReceiver{
-
-  });
-  //启动后台推送服务
-  Push.registerService(getApplicationContext());
+  IMHttpAPI.setAPIURL(&quot;api.gobelieve.io&quot;);
+  SmartPushServiceProvider.setHost(&quot;pushnode.gobelieve.io&quot;)
+  mIMService.setHost(&quot;imnode.gobelieve.io&quot;);
 </code></pre></li>
 </ul>
-<h2 id="-im-accesstoken-im">用户登录成功后启动IM，设置用户的accesstoken并启动im</h2>
+<h2 id="-im">初始化IM</h2>
+<ul>
+<li>在开始IM服务之前需要设置用户accessToken以及添加IMServiceObserver监听状态回调.</li>
+</ul>
+<pre><code>    mIMService = IMService.getInstance();
+    String androidID = Settings.Secure.getString(this.getContentResolver(),
+        Settings.Secure.ANDROID_ID);
+
+    //设置设备唯一标识,用于多点登录时设备校验
+    mIMService.setDeviceID(androidID);
+    //注册回调
+    mIMService.addObserver(new IMServiceObserver() {
+
+    });
+    //监听网路状态变更
+    mIMService.registerConnectivityChangeReceiver(getApplicationContext());
+
+    //设置推送服务的回调
+    Push.registerReceiver(new IMsgReceiver{
+
+    });
+    //启动后台推送服务
+    Push.registerService(getApplicationContext());
+</code></pre><h2 id="-im-accesstoken-im">用户登录成功后启动IM，设置用户的accesstoken并启动im</h2>
 <pre><code>     mIMService.setAccessToken(token);
      mIMService.start();
 </code></pre><h2 id="-devicetoken-im">用户注销后清空用户的devicetoken并停止IM</h2>
@@ -294,12 +314,18 @@
 <h2 id="-imkit">初始化IMKit</h2>
 <ul>
 <li><p>除了imsdk必要的初始化动作外，使用imkit需要初始化存储类</p>
-<pre><code>  FileCache fc = FileCache.getInstance();
+<pre><code>  //设置的路径名中可以包含用户id，这样就可以同时保存多个用户的聊天历史
+  //否则用户注销后，必须要清空目录
+  FileCache fc = FileCache.getInstance();
   fc.setDir(this.getDir(&quot;cache&quot;, MODE_PRIVATE));
+
   PeerMessageDB db = PeerMessageDB.getInstance();
   db.setDir(this.getDir(&quot;peer&quot;, MODE_PRIVATE));
+  GroupMessageDB db = GroupMessageDB.getInstance();
+  db.setDir(this.getDir(&quot;group&quot;, MODE_PRIVATE));
 
   mIMService.setPeerMessageHandler(PeerMessageHandler.getInstance());
+  mIMService.setGroupMessageHandler(GroupMessageHandler.getInstance());
 </code></pre></li>
 </ul>
 <h2 id="-">打开聊天界面</h2>
