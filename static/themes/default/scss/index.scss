@@ -317,6 +317,9 @@ li {
     background-color: #fff;
     -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .1);
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .1);
+    &.btn-wrap-large{
+        left:-80px
+    }
     .btn {
         margin: 0 15px !important;
     }
