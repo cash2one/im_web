@@ -54,8 +54,11 @@
                 var _this = $(this);
                 _this.addClass('active').siblings('.toggle').removeClass('active');
             });
-            $(document).on('click',function(){
-                toggle.removeClass('active');
+            $(document).on('click',function(e){
+                var tar = $(e.target);
+                if(!tar.hasClass('btn-gray')){
+                    toggle.removeClass('active');
+                }
             })
 
         }(jQuery));
