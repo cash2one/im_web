@@ -1,12 +1,12 @@
 <!doctype html>
 <!--[if lt IE 7]>
-<html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<html class="no-js ie6 oldie"> <![endif]-->
 <!--[if IE 7]>
-<html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<html class="no-js ie7 oldie"> <![endif]-->
 <!--[if IE 8]>
-<html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<html class="no-js ie8 oldie"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js" lang="en"> <!--<![endif]-->
+<html class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
     <title>文档中心</title>
@@ -30,16 +30,16 @@
     <div class="wrapper">
         <nav class="sidebar-nav">
             <div class="sidebar-content">
-                <h1 class="nav-title">推送文档</h1>
+                <!--<h1 class="nav-title">推送文档</h1>-->
                 <ul>
 
             <li  class="active"  ><a href="./Android_SDK.html">Android开发文档</a><i class="disclosure"></i></li>
 
-            <li  ><a href="./IOS_SDK.html">IOS开发文档</a><i class="disclosure"></i></li>
+            <li  ><a href="IOS_SDK.html">IOS开发文档</a><i class="disclosure"></i></li>
 
-            <li  ><a href="./JS_SDK.html">JS开发文档</a><i class="disclosure"></i></li>
+            <li  ><a href="JS_SDK.html">JS开发文档</a><i class="disclosure"></i></li>
 
-            <li  ><a href="./Server.html">服务器RestAPI文档</a><i class="disclosure"></i></li>
+            <li  ><a href="Server.html">服务器RestAPI文档</a><i class="disclosure"></i></li>
 
 </ul>
 
@@ -62,7 +62,6 @@
 <li><p>manifest 标签下添加：</p>
 <pre><code> &lt;!-- 必需： 权限配置 --&gt;
  &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
- &lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&gt;
  &lt;uses-permission android:name=&quot;android.permission.BATTERY_STATS&quot; /&gt;
  &lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot; /&gt;
  &lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
@@ -75,21 +74,18 @@
  &lt;uses-permission android:name=&quot;android.permission.SYSTEM_ALERT_WINDOW&quot; /&gt;
  &lt;uses-permission android:name=&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot; /&gt;
  &lt;uses-permission android:name=&quot;android.permission.WAKE_LOCK&quot; /&gt;
- &lt;uses-permission android:name=&quot;android.permission.MODIFY_AUDIO_SETTINGS&quot;/&gt;
 </code></pre></li>
 </ul>
-<pre><code>    &lt;uses-feature android:name=&quot;android.hardware.camera&quot; /&gt;
-    &lt;uses-feature android:name=&quot;android.hardware.camera.autofocus&quot; /&gt;
-</code></pre><ul>
+<ul>
 <li><p>application 标签下添加：</p>
 <pre><code> &lt;!-- 必需： 应用ID(此处的id为您申请的应用id) --&gt;
  &lt;meta-data
-     android:name=&quot;GOBELIEVE_APPID&quot;
-     android:value=&quot;7&quot; /&gt;
+     android:name=&quot;NGDS_APPID&quot;
+     android:value=&quot;11035&quot; /&gt;
 
  &lt;!-- 必需： 应用KEY (此处appkey为您申请的应用密钥)--&gt;
  &lt;meta-data
-     android:name=&quot;GOBELIEVE_APPKEY&quot;
+     android:name=&quot;NGDS_APPKEY&quot;
      android:value=&quot;HS5NVruwDJxFwUPEdzqo7gBrQCSFsIhA&quot; /&gt;
 
  &lt;!-- 必需： 推送页面配置 --&gt;
@@ -97,16 +93,16 @@
 
  &lt;!-- 必需： push 服务配置 --&gt;
  &lt;service
-     android:name=&quot;com.beetle.push.PushService&quot;
-     android:process=&quot;:push&quot; /&gt;
+     android:name=&quot;com.gameservice.sdk.push.v2.api.SmartPushService&quot;
+     android:process=&quot;:ngds&quot; /&gt;
 
  &lt;!-- 必需： push 消息接收配置 --&gt;
  &lt;receiver
-     android:name=&quot;com.beetle.push.PushReceiver&quot;
+     android:name=&quot;com.gameservice.sdk.push.v2.api.SmartPushReceiver&quot;
      android:enabled=&quot;true&quot;
      android:exported=&quot;false&quot;
      android:priority=&quot;90000&quot;
-     android:process=&quot;:push&quot;&gt;
+     android:process=&quot;:ngds&quot;&gt;
      &lt;intent-filter&gt;
          &lt;action android:name=&quot;android.intent.action.PACKAGE_ADDED&quot; /&gt;
          &lt;action android:name=&quot;android.intent.action.PACKAGE_CHANGED&quot; /&gt;
@@ -118,6 +114,7 @@
          &lt;action android:name=&quot;android.intent.action.USER_PRESENT&quot; /&gt;
          &lt;action android:name=&quot;android.net.conn.CONNECTIVITY_CHANGE&quot; /&gt;
          &lt;action android:name=&quot;android.intent.action.BOOT_COMPLETED&quot; /&gt;
+         &lt;action android:name=&quot;cn.ngds.android.intent.alarm&quot; /&gt;
      &lt;/intent-filter&gt;
  &lt;/receiver&gt;
 </code></pre></li>

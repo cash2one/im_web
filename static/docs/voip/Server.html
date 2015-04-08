@@ -1,12 +1,12 @@
 <!doctype html>
 <!--[if lt IE 7]>
-<html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<html class="no-js ie6 oldie"> <![endif]-->
 <!--[if IE 7]>
-<html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<html class="no-js ie7 oldie"> <![endif]-->
 <!--[if IE 8]>
-<html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<html class="no-js ie8 oldie"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js" lang="en"> <!--<![endif]-->
+<html class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
     <title>文档中心</title>
@@ -30,14 +30,12 @@
     <div class="wrapper">
         <nav class="sidebar-nav">
             <div class="sidebar-content">
-                <h1 class="nav-title">推送文档</h1>
+                <!--<h1 class="nav-title">推送文档</h1>-->
                 <ul>
 
             <li  ><a href="./Android_SDK.html">Android开发文档</a><i class="disclosure"></i></li>
 
             <li  ><a href="./IOS_SDK.html">IOS开发文档</a><i class="disclosure"></i></li>
-
-            <li  ><a href="./JS_SDK.html">JS开发文档</a><i class="disclosure"></i></li>
 
             <li  class="active"  ><a href="./Server.html">服务器RestAPI文档</a><i class="disclosure"></i></li>
 
@@ -136,60 +134,6 @@
 <li><p>操作失败:
 状态码:400</p>
 </li>
-</ul>
-<h3 id="-">创建群组</h3>
-<ul>
-<li>请求地址：<strong>POST /groups</strong></li>
-<li>是否认证：服务端授权和客户端授权</li>
-<li>请求头:Content-Type:application/json</li>
-<li>请求内容:</li>
-</ul>
-<pre><code> {
-    &quot;master_id&quot;:&quot;管理员id(整型)&quot;,
-    &quot;name&quot;:&quot;群主题名&quot;,
-    &quot;members&quot;:[&quot;uid&quot;,...]
- }
-</code></pre><ul>
-<li><p>成功响应：200</p>
-<p>  {</p>
-<pre><code>  &quot;group_id&quot;:&quot;群组id(整型)&quot;
-</code></pre><p>  }</p>
-</li>
-</ul>
-<ul>
-<li>操作失败:
-400 非法的输入参数</li>
-</ul>
-<h3 id="-">解散群组</h3>
-<ul>
-<li>请求地址：<strong>DELETE /groups/{gid}</strong></li>
-<li>是否认证：服务端授权和客户端授权</li>
-<li>成功响应：200</li>
-<li>操作失败：
-400 非法的群id</li>
-</ul>
-<h3 id="-">添加群组成员</h3>
-<ul>
-<li>请求地址：<strong>POST /groups/{gid}/members</strong></li>
-<li>是否认证：服务端授权和客户端授权</li>
-<li>请求头:Content-Type:application/json</li>
-<li><p>请求内容:</p>
-<p>  {</p>
-<pre><code>  &quot;uid&quot;:&quot;群成员id&quot;
-</code></pre><p>  }</p>
-</li>
-<li><p>成功响应：200</p>
-</li>
-<li>操作失败：
-400 非法的群成员id</li>
-</ul>
-<h3 id="-">离开群</h3>
-<ul>
-<li>请求地址：<strong>DELETE /groups/{gid}/members/{mid}</strong></li>
-<li>是否认证：服务端授权和客户端授权</li>
-<li>成功响应：200</li>
-<li>操作失败：
-400 非法参数</li>
 </ul>
 
         </div>

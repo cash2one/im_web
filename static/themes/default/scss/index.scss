@@ -27,6 +27,10 @@ li {
     list-style: none;
 }
 
+.hide {
+    display: none;
+}
+
 .container {
     width: 940px;
     padding: 0 10px;
@@ -62,7 +66,7 @@ li {
         a {
             color: #888;
         }
-        .btn-default{
+        .btn-default {
             margin-right: 10px;
         }
     }
@@ -140,6 +144,16 @@ li {
             color: #fff;
         }
     }
+    &.btn-gray {
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+        &:hover, &.hover {
+            background-color: #cff7c3;
+            border-color: #80cf67;
+        }
+
+    }
     &.btn-large {
         padding: 12px 24px;
         font-size: 20px;
@@ -147,7 +161,7 @@ li {
     &.btn-primary {
         background-color: #5cb85c;;
         border-color: #4cae4c;
-        color: #fff!important;
+        color: #fff !important;
         &:hover {
             background-color: #5cb85c;;
             border-color: #4cae4c;
@@ -158,7 +172,7 @@ li {
 
 .footer {
     .copyright {
-        margin-top: 100px;
+        margin-top: 120px;
         text-align: center;
         line-height: 42px;
         color: #888;
@@ -255,6 +269,21 @@ li {
     }
 }
 
+.toggle {
+    .btn-wrap {
+        display: none;
+    }
+    &.active {
+        .btn-gray {
+            background-color: #cff7c3!important;
+            border-color: #80cf67!important;
+        }
+        .btn-wrap {
+            display: block;
+        }
+    }
+}
+
 .contact {
     padding: 40px 0;
     text-align: center;
@@ -268,5 +297,41 @@ li {
     }
     p {
         line-height: 42px;
+    }
+}
+
+.inline {
+    display: inline-block;
+    position: relative;
+}
+
+.btn-wrap {
+    position: absolute;
+    top: 70px;
+    left: -67px;
+    width: 300px;
+    padding-top: 20px;
+    height: 55px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .1);
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .1);
+    .btn {
+        margin: 0 15px !important;
+    }
+    &:before {
+        content: ' ';
+        position: absolute;
+        left: 50%;
+        top: -10px;
+        width: 0px;
+        height: 0px;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid #fff;
+    }
+    &.btn-wrap-large {
+        width: 390px;
     }
 }
