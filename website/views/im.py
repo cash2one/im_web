@@ -131,9 +131,9 @@ def im_apps_edit(app_id):
                 ios_client_id = clt['id']
 
     # 更新apns证书
-    _update_apns(ios_client_id, clients)
+    _update_apns(ios_client_id, clients, app_id)
 
-    return redirect(url_for('.im_game_edit', game_id=app_id))
+    return redirect(url_for('.im_game_detail', game_id=app_id, game=app_id, name=request.form.get('name')))
 
 
 @web.route('/im/download/<string:path>', methods=['GET'])
@@ -202,6 +202,7 @@ def im_game_complete(game_id):
         return render_template('im/game/complete.html', data=data)
     else:
         abort(404)
+
 
 @web.route('/im/game/detail/<int:game_id>')
 @_im_login_required
