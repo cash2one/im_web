@@ -2,7 +2,7 @@
 project="gobelieve.io"
 app_dir="/data/wwwroot/${project}"
 log_dir="/data/logs/${project}"
-image="58.22.120.52:5000/library/python_dev"
+image="python_dev"
 cd ${app_dir} || exit
 unset GIT_DIR
 git pull
