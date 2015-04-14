@@ -68,7 +68,7 @@
              {% call inline_field('信鸽 ACCESS ID：') %}
                <input type="text" name="xinge_access_id" id="xinge_access_id" class="ipt ipt-short"
                {% call(client) print_as_platform_type(platform_name = "android") %}
-                      value="{{client.certificate.xinge_access_id}}"
+                      value="{{client.certificate.xinge_access_id if client.certificate.xinge_access_id else ''}}"
                 {% endcall %}
                />
              {% endcall %}
@@ -76,7 +76,7 @@
              {% call inline_field('信鸽 SECRET KEY：') %}
                <input type="text" name="xinge_secret_key" id="xinge_secret_key" class="ipt ipt-short"
                {% call(client) print_as_platform_type(platform_name = "android") %}
-                      value="{{client.certificate.xinge_secret_key}}"
+                      value="{{client.certificate.xinge_secret_key if client.certificate.xinge_secret_key else ''}}"
                {% endcall %}
                />
              {% endcall %}
