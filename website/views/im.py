@@ -76,7 +76,8 @@ def im_apps_add():
         if app_obj.feed(developer_id=session['user']['id'],
                         name=request.form.get('name'),
                         key=random_ascii_string(32),
-                        secret=random_ascii_string(32)
+                        secret=random_ascii_string(32),
+                        status=int(request.form.get('status', 0))
                         ):
 
             clients = _get_clients()
@@ -101,7 +102,13 @@ def im_apps_add():
                 pkey, cer = crypto.create_client_certificate(android_client_id)
 
                 client_obj = Client().set_id(android_client_id)
-                client_obj.set_certificate(pkey, cer)
+                xinge_access_id = None
+                xinge_secret_key = None
+                if request.form.get('xinge_access_id') and request.form.get('xinge_secret_key'):
+                    xinge_access_id = request.form.get('xinge_access_id')
+                    xinge_secret_key = request.form.get('xinge_secret_key')
+
+                client_obj.set_certificate(pkey, cer, xinge_access_id, xinge_secret_key)
 
             return redirect(url_for('.im_game_complete', game_id=app_obj.id))
     return redirect(url_for('.im_game_add'))
@@ -117,7 +124,8 @@ def im_apps_edit(app_id):
 
     app_obj = _get_app(app_id)
     app_obj.feed(developer_id=session['user']['id'],
-                 name=request.form.get('name')
+                 name=request.form.get('name'),
+                 status=int(request.form.get('status', app_obj['status']))
                  )
 
     clients = _get_clients()
@@ -129,6 +137,14 @@ def im_apps_edit(app_id):
         if int(clt['platform_type']) == PlatformType.IOS:
             if clt['is_active']:
                 ios_client_id = clt['id']
+        elif int(clt['platform_type']) == PlatformType.ANDROID:
+            if clt['is_active']:
+                if request.form.get('xinge_access_id') and request.form.get('xinge_secret_key'):
+                    xinge_access_id = request.form.get('xinge_access_id')
+                    xinge_secret_key = request.form.get('xinge_secret_key')
+
+                    client_obj = Client().set_id(clt['id'])
+                    client_obj.set_certificate(xinge_access_id=xinge_access_id, xinge_secret_key=xinge_secret_key)
 
     # 更新apns证书
     _update_apns(ios_client_id, clients, app_id)

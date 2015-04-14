@@ -7,6 +7,7 @@ from utils.pager import Pager
 from utils.response_meta import ResponseMeta
 from utils.request import Request
 from utils.func import init_logger
+from config import APP_MODE
 
 LOGGER = init_logger(__name__)
 
@@ -18,6 +19,11 @@ def http_error_handler(err):
 
 def response_meta_handler(response_meta):
     return response_meta.get_response()
+
+
+def generic_error_handler(err):
+    LOGGER.exception(err)
+    return ResponseMeta(http_code=500, description='Server Internal Error!' if APP_MODE == 'Production' else str(err))
 
 
 def before_request():
@@ -43,6 +49,7 @@ def init_app(app):
     for error in range(400, 420) + range(500, 506):
         app.error_handler_spec[None][error] = http_error_handler
     app.register_error_handler(ResponseMeta, response_meta_handler)
+    app.register_error_handler(Exception, generic_error_handler)
 
     from utils.mail import Mail
     from utils.sentry import Sentry
