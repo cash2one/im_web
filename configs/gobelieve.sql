@@ -2,7 +2,8 @@
 SQLyog Ultimate v10.42 
 MySQL - 5.5.5-10.0.17-MariaDB-1~wheezy-log : Database - gobelieve
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -58,6 +59,7 @@ CREATE TABLE `app` (
   `ctime` int(10) unsigned NOT NULL COMMENT '创建时间',
   `key` varchar(32) CHARACTER SET ascii NOT NULL COMMENT 'app key',
   `secret` varchar(32) CHARACTER SET ascii NOT NULL COMMENT 'app secret',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '应用状态，0开发 1生产',
   PRIMARY KEY (`id`),
   KEY `developer_id` (`developer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='应用';
@@ -106,6 +108,8 @@ CREATE TABLE `client_certificate` (
   `pkey` text NOT NULL COMMENT '私钥',
   `cer` text CHARACTER SET ascii COLLATE ascii_bin NOT NULL COMMENT '证书',
   `update_time` int(10) unsigned NOT NULL COMMENT '修改时间',
+  `xinge_access_id` bigint(20) DEFAULT NULL COMMENT '信鸽ID',
+  `xinge_secret_key` varchar(64) CHARACTER SET ascii DEFAULT NULL COMMENT '信鸽密钥',
   PRIMARY KEY (`client_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='android证书';
 

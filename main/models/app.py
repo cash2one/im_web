@@ -17,7 +17,8 @@ class App(God):
         'developer_id',  # 开发者ID
         'ctime',  # 创建时间
         'key',  # app key
-        'secret'  # app secret
+        'secret',  # app secret
+        'status'  # 应用状态
     )
 
     _collections = ('clients', )

@@ -90,6 +90,10 @@
                   <p class="apns-wrapper">
                     <span class="mr"><a href="{{ item.certificate.pkey_url }}">公钥下载</a></span>
                     <span class="mr"><a href="{{ item.certificate.cer_url }}">证书下载</a></span>
+
+                    {% if item.certificate.xinge_access_id | int > 0 %}
+                      <span class="success mr"><strong class="mr-5">√</strong>信鸽</span>
+                    {% endif %}
                   </p>
                 {% endif %}
                 <p class="error">&nbsp;</p>
@@ -98,6 +102,12 @@
           </tr>
         {% endif %}
       {% endfor %}
+
+      {% call inline_field('应用状态:') %}
+        <p class="show-edit">
+          <span class="name">{{ "生产环境" if data.gamedata.status| int == 1 else "开发环境" }}</span>
+        </p>
+      {% endcall %}
 
       {% call inline_field('') %}
         <a href="/im/game/{{data.gamedata.id}}" class="btn-s btn-info">编辑</a>

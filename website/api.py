@@ -10,12 +10,6 @@ LOGGER = init_logger(__name__)
 api = Blueprint('api', __name__, url_prefix='/api')
 
 
-@api.errorhandler
-def generic_error_handler(err):
-    LOGGER.exception(err)
-    return ResponseMeta(http_code=500, description='Server Internal Error!' if APP_MODE == 'Production' else str(err))
-
-
 @api.route('/login', methods=['POST'])
 def login_post():
     """

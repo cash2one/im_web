@@ -140,7 +140,7 @@ class Client(God):
 
         return rs.fetchone() or {}
 
-    def set_certificate(self, pkey, cer):
+    def set_certificate(self, pkey=None, cer=None, xinge_access_id=None, xinge_secret_key=None):
         row = self.fetch_certificate()
 
         certificate = {}
@@ -151,6 +151,11 @@ class Client(God):
         else:
             if row.get('update_time'):
                 certificate['update_time'] = row.get('update_time')
+
+        if xinge_access_id is not None and xinge_secret_key is not None:
+            certificate['xinge_access_id'] = xinge_access_id
+            certificate['xinge_secret_key'] = xinge_secret_key
+            certificate['update_time'] = int(time.time())
 
         if row:
             params = []
@@ -185,6 +190,8 @@ class Client(God):
                     'client_id': self.get_id(),
                     'pkey': certificate.get('pkey', ''),
                     'cer': certificate.get('cer', ''),
+                    'xinge_access_id': certificate.get('xinge_access_id', ''),
+                    'xinge_secret_key': certificate.get('xinge_secret_key', ''),
                     'update_time': certificate.get('update_time', 0),
                 }
 
@@ -192,7 +199,7 @@ class Client(God):
 
     def fetch_certificate(self):
         rs = self.mysql.execute(
-            "SELECT `pkey`, `cer`, update_time "
+            "SELECT pkey, cer, xinge_access_id, xinge_secret_key, update_time "
             "FROM client_certificate WHERE client_id=%s",
             self.get_id()
         )
@@ -200,7 +207,10 @@ class Client(God):
         return rs.fetchone() or {}
 
     def get_certificate_url(self):
+        certificate = self.fetch_certificate()
         return {
             'pkey_url': Certificate.create_download_url(self.get_id(), 'pkey', self.ctime),
-            'cer_url': Certificate.create_download_url(self.get_id(), 'cer', self.ctime)
+            'cer_url': Certificate.create_download_url(self.get_id(), 'cer', self.ctime),
+            'xinge_access_id': certificate['xinge_access_id'],
+            'xinge_secret_key': certificate['xinge_secret_key']
         }
