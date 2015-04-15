@@ -63,7 +63,10 @@
         <p><span class="tips mr-5">请填写Android APK包的PackageName</span></p>
         <p class="error">&nbsp;</p>
 
-        <div class="sub-form">
+        <p class="">推送平台： <label><input type="radio" name="push_type" value="0" checked="checked" />内置</label>
+            <label><input type="radio" name="push_type" value="1"/>信鸽</label></p>
+
+        <div class="sub-form" id="form_xinge" style="">
            <table>
              {% call inline_field('信鸽 ACCESS ID：') %}
                <input type="text" name="xinge_access_id" id="xinge_access_id" class="ipt ipt-short"
@@ -121,12 +124,6 @@
          </div>
       {% endcall %}
     {% endblock %}
-
-    {% call inline_field('应用状态') %}
-        <p style="line-height: 37px;"><input type="radio" class="ipt ipt-small" style="padding-top: 20px;" name="status" value="0" {{"checked=checked" if data.game.get('status')|int == 0 else ""}} />开发环境
-
-        <input type="radio" class="ipt ipt-small"  style="padding-top: 20px;" name="status" value="1" {{"checked=checked" if data.game.get('status')|int == 1 else ""}} />生产环境</p>
-    {% endcall %}
 
     {% call inline_field('') %}
       <button type="submit" class="btn btn-info">提交</button>
