@@ -1,12 +1,12 @@
 <!doctype html>
 <!--[if lt IE 7]>
-<html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<html class="no-js ie6 oldie"> <![endif]-->
 <!--[if IE 7]>
-<html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<html class="no-js ie7 oldie"> <![endif]-->
 <!--[if IE 8]>
-<html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<html class="no-js ie8 oldie"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js" lang="en"> <!--<![endif]-->
+<html class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
     <title>文档中心</title>
@@ -30,7 +30,7 @@
     <div class="wrapper">
         <nav class="sidebar-nav">
             <div class="sidebar-content">
-                <h1 class="nav-title">推送文档</h1>
+                <!--<h1 class="nav-title">推送文档</h1>-->
                 <ul>
 
             <li  ><a href="./Android_SDK.html">Android开发文档</a><i class="disclosure"></i></li>
@@ -49,6 +49,10 @@
     <div class="wrapper">
         <div class="nav-page-content typo typo-selection" role="main">
             <h1 id="restapi">RestAPI</h1>
+<h2 id="-">接口地址</h2>
+<ul>
+<li>正式:<a href="http://api.gobelieve.io">http://api.gobelieve.io</a> 沙盒:<a href="http://sandbox.api.gobelieve.io">http://sandbox.api.gobelieve.io</a></li>
+</ul>
 <h2 id="-token">获取用户token</h2>
 <ul>
 <li>第三方应用的客户端通过应用服务器作为桥梁获取连接im服务器使用到的token</li>
@@ -80,7 +84,7 @@
 <h3 id="-">第三方服务端授权</h3>
 <ul>
 <li>请求地址: 所有可供第三方服务端访问的接口</li>
-<li>请求头部: Authorization: Basic $base64(appid:appsecret)</li>
+<li>请求头部: Authorization: Basic $base64(appid:$hex_md5(appsecret))</li>
 </ul>
 <h3 id="-">客户端授权</h3>
 <p>-请求头部: Authorization: Bearer $accesstoken</p>
@@ -107,10 +111,10 @@
 <ul>
 <li>请求地址：<strong>POST /device/bind </strong></li>
 <li>是否认证：客户端授权</li>
+<li>接口说明: 只支持IOS端</li>
 <li><p>请求内容：</p>
 <pre><code>  {
-      &quot;apns_device_token&quot;: &quot;IOS设备token，16进制字符串(可选)&quot;,
-      &quot;ng_device_token&quot;: &quot;android设备token，16进制字符串(可选)&quot;,
+      &quot;apns_device_token&quot;: &quot;IOS设备token，16进制字符串&quot;,
   }
 </code></pre></li>
 <li><p>成功响应 200</p>
@@ -125,8 +129,7 @@
 <li>是否认证：客户端授权</li>
 <li><p>请求内容：</p>
 <pre><code>  {
-      &quot;apns_device_token&quot;: &quot;IOS设备token，16进制字符串(可选)&quot;,
-      &quot;ng_device_token&quot;: &quot;android设备token，16进制字符串(可选)&quot;,
+      &quot;apns_device_token&quot;: &quot;IOS设备token，16进制字符串&quot;,
   }
 </code></pre></li>
 <li><p>成功响应 200</p>

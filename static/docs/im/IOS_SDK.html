@@ -1,12 +1,12 @@
 <!doctype html>
 <!--[if lt IE 7]>
-<html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<html class="no-js ie6 oldie"> <![endif]-->
 <!--[if IE 7]>
-<html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<html class="no-js ie7 oldie"> <![endif]-->
 <!--[if IE 8]>
-<html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<html class="no-js ie8 oldie"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js" lang="en"> <!--<![endif]-->
+<html class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
     <title>文档中心</title>
@@ -30,7 +30,7 @@
     <div class="wrapper">
         <nav class="sidebar-nav">
             <div class="sidebar-content">
-                <h1 class="nav-title">推送文档</h1>
+                <!--<h1 class="nav-title">推送文档</h1>-->
                 <ul>
 
             <li  ><a href="./Android_SDK.html">Android开发文档</a><i class="disclosure"></i></li>
@@ -71,6 +71,7 @@
 <p>启动im服务只需要设置用户的access token，调用启动接口并添加消息的监听对象。</p>
 <pre><code>[IMService instance].deviceID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
 
+//监听网络状态变化
 [[IMService instance] startRechabilityNotifier];
 </code></pre><h2 id="-im-accesstoken-im">用户登录成功后启动IM，设置用户的accesstoken并启动im</h2>
 <pre><code>[IMHttpAPI instance].accessToken = accessToken;
@@ -105,6 +106,9 @@
 </code></pre><h3 id="-id">设置当前设备的id</h3>
 <pre><code>属性名：String deviceID
 功能：设备id可以用户多点登陆的唯一性判断,可选调用
+</code></pre><h3 id="-">监控网络变化</h3>
+<pre><code>方法名: -(void) startRechabilityNotifier
+功能: 可以及时的根据网络变化情况，断开，建立socket链接。
 </code></pre><h3 id="-">设置观察者</h3>
 <pre><code>方法名: -(void) addMessageObserver:(id&lt;IMServiceObserver&gt;)observer
 功能：设置observer，在observer中处理接受到的消息。
@@ -125,6 +129,12 @@
 功能：应用进入后台，im服务器会将将消息推送到通知栏
 </code></pre><h3 id="-">发送消息</h3>
 <pre><code>方法名: -(BOOL) sendPeerMessage:(IMMessage*)msg
+功能：发送im消息，如果当前连接处于断开状态，消息会发送失败, 函数返回YES，也不能表明服务器已经接收到消息。
+参数说明：
+    *msg 消息对象
+返回值:BOOL
+</code></pre><h3 id="-">发送群组消息</h3>
+<pre><code>方法名: -(BOOL) sendGroupMessage:(IMMessage*)msg
 功能：发送im消息，如果当前连接处于断开状态，消息会发送失败, 函数返回YES，也不能表明服务器已经接收到消息。
 参数说明：
     *msg 消息对象

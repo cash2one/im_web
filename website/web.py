@@ -41,4 +41,4 @@ def price():
 
 @web.route('/docs')
 def doc():
-    return redirect(url_for('web.static', filename='docs/Server.html'))
+    return redirect(url_for('web.static', filename='docs/im/Server.html'))
