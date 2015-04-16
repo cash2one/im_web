@@ -18,7 +18,8 @@ class App(God):
         'ctime',  # 创建时间
         'key',  # app key
         'secret',  # app secret
-        'status'  # 应用状态
+        'status',  # 应用状态,
+        'publish_time'  # 发布时间
     )
 
     _collections = ('clients', )

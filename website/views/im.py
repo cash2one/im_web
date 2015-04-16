@@ -13,6 +13,7 @@ from utils.crypt import Md5Utils
 from utils.func import random_ascii_string
 from main.god import And, Exp
 import os
+import time
 
 
 def _im_login_required(f):
@@ -122,7 +123,8 @@ def im_apps_publish(app_id):
     """
     app_obj = _get_app(app_id)
     app_obj.feed(developer_id=session['user']['id'],
-                 status=1
+                 status=1,
+                 publish_time=int(time.time())
                  )
     return redirect(url_for('.im_game_detail', game_id=app_id, game=app_id, name=request.form.get('name')))
 
