@@ -114,6 +114,19 @@ def im_apps_add():
     return redirect(url_for('.im_game_add'))
 
 
+@web.route('/im/game/publish/<int:app_id>', methods=['GET'])
+@_im_login_required
+def im_apps_publish(app_id):
+    """
+    修改应用
+    """
+    app_obj = _get_app(app_id)
+    app_obj.feed(developer_id=session['user']['id'],
+                 status=1
+                 )
+    return redirect(url_for('.im_game_detail', game_id=app_id, game=app_id, name=request.form.get('name')))
+
+
 @web.route('/im/apps/<int:app_id>', methods=['POST'])
 @_im_login_required
 def im_apps_edit(app_id):
@@ -124,7 +137,7 @@ def im_apps_edit(app_id):
 
     app_obj = _get_app(app_id)
     app_obj.feed(developer_id=session['user']['id'],
-                 name=request.form.get('name'),
+                 name=request.form.get('name', app_obj['name']),
                  status=int(request.form.get('status', app_obj['status']))
                  )
 

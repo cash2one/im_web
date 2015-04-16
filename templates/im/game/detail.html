@@ -90,10 +90,6 @@
                   <p class="apns-wrapper">
                     <span class="mr"><a href="{{ item.certificate.pkey_url }}">公钥下载</a></span>
                     <span class="mr"><a href="{{ item.certificate.cer_url }}">证书下载</a></span>
-
-                    {% if item.certificate.xinge_access_id | int > 0 %}
-                      <span class="success mr"><strong class="mr-5">√</strong>信鸽</span>
-                    {% endif %}
                   </p>
                 {% endif %}
                 <p class="error">&nbsp;</p>
@@ -112,6 +108,13 @@
       {% call inline_field('') %}
         <a href="/im/game/{{data.gamedata.id}}" class="btn-s btn-info">编辑</a>
       {% endcall %}
+
+      {% if data.gamedata.status| int == 0 %}
+      {% call inline_field('') %}
+        <a href="/im/game/publish/{{data.gamedata.id}}" class="btn-s btn-info">发布</a>
+      {% endcall %}
+      {% endif %}
+
     </tbody>
   </table>
 {% endblock %}
