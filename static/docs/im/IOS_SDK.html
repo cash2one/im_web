@@ -57,6 +57,7 @@
 <li>在Build Phases的Link Binary With Libraries中添加 libimsdk.a libimkit.a</li>
 <li>将imsdk和imkit的头文件加入到 User Header Search Paths中</li>
 <li>将imKitRes包含的资源文件加入到工程中</li>
+<li>将imkit的第三方依赖加入工程 FBShimmering HPGrowingTextView SDWebImage Titanium Toast</li>
 </ul>
 <h2 id="imsdk">IMSDK</h2>
 <ul>
@@ -95,7 +96,7 @@
   im.receiver = receiver;
   //消息本地id
   im.msgLocalID = msgLocalID;
-  im.content = &quot;消息内容&quot;;
+  im.content = @&quot;消息内容&quot;;
   [[IMService instance] sendPeerMessage:im];
 </code></pre></li>
 </ul>
@@ -110,7 +111,19 @@
 <pre><code>方法名: -(void) startRechabilityNotifier
 功能: 可以及时的根据网络变化情况，断开，建立socket链接。
 </code></pre><h3 id="-">设置观察者</h3>
-<pre><code>方法名: -(void) addMessageObserver:(id&lt;IMServiceObserver&gt;)observer
+<pre><code>方法名: -(void) addConnectionObserver:(id&lt;IMConnectionObserver&gt;)observer
+功能：设置observer，在observer中处理接受到的消息。
+参数说明： 
+    * observer 观察者
+返回值：无返回值
+</code></pre><h3 id="-">设置点对点消息的接受者</h3>
+<pre><code>方法名: -(void) addPeerMessageObserver:(id&lt;PeerMessageObserver&gt;)observer
+功能：设置observer，在observer中处理接受到的消息。
+参数说明： 
+    * observer 观察者
+返回值：无返回值
+</code></pre><h3 id="-">设置群组消息的接受者</h3>
+<pre><code>方法名: -(void) addGroupMessageObserver:(id&lt;GroupMessageObserver&gt;)observer
 功能：设置observer，在observer中处理接受到的消息。
 参数说明： 
     * observer 观察者
@@ -139,7 +152,7 @@
 参数说明：
     *msg 消息对象
 返回值:BOOL
-</code></pre><h2 id="-imserviceobserver">接口IMServiceObserver</h2>
+</code></pre><h2 id="-imconnectionobserver">接口IMConnectionObserver</h2>
 <h3 id="-">连接状态</h3>
 <pre><code>方法名:-(void) onConnectState:(int)state
 功能:连接状态变更通知
@@ -152,7 +165,8 @@
 参数说明:
     *lp 登录点信息
 返回值:无返回值
-</code></pre><h3 id="-">消息</h3>
+</code></pre><h2 id="-peermessageobserver">接口PeerMessageObserver</h2>
+<h3 id="-">消息</h3>
 <pre><code>方法名:-(void) onPeerMessage:(IMMessage*)msg
 功能：接受到一条im消息
 参数说明：
@@ -178,6 +192,34 @@
 参数说明:
     *msgLocalID 消息的本地ID
     *uid 消息接受者
+返回值:无返回值
+</code></pre><h2 id="-groupmessageobserver">接口GroupMessageObserver</h2>
+<h3 id="-">群组消息</h3>
+<pre><code>方法名:-(void) onGroupMessage:(IMMessage*)msg
+功能：接受到一条im消息
+参数说明：
+    *msg 消息对象
+返回值:无返回值
+</code></pre><h3 id="-ack">群组消息ACK</h3>
+<pre><code>方法名:-(void) onGroupMessageACK:(int)msgLocalID gid:(int64_t)gid
+功能:服务器对收到消息的ack,此时这条消息才能标志为发送成功
+参数说明:
+    *msgLocalID 消息的本地ID
+    *gid 群组ID
+返回值:无返回值
+</code></pre><h3 id="-">群组消息发送失败</h3>
+<pre><code>方法名:-(void) onGroupMessageFailure:(int)msgLocalID gid:(int64_t)gid
+功能：消息发出后，未收到服务器的ack，在和服务器的连接断开后，会通知消息发送失败。
+参数说明:
+    *msgLocalID 消息的本地ID
+    *gid 群组ID
+返回值:无返回值
+</code></pre><h3 id="-">群组通知</h3>
+<pre><code>方法名:-(void) onGroupNotification:(NSString*)notification
+功能：群组创建，解散和群组成员变更的通知消息
+参数说明:
+    *notification 通知内容
+
 返回值:无返回值
 </code></pre><h2 id="-imapi">类IMApi</h2>
 <h3 id="-device-token">设置当前用户的device token</h3>

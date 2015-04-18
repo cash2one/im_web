@@ -57,7 +57,8 @@
 </ul>
 <h2 id="-imsdk-imkit-android-studio-">将imsdk，imkit加入到android studio工程</h2>
 <ul>
-<li>打开菜单 File-&gt;New Module-&gt;Import .JAR or .AAR Package,分别导入imsdk.aar imkit.aar asynctcp.aar pushsdk.aar</li>
+<li>将imsdk.jar pushsdk.jar asynctcp.jar加入工程</li>
+<li>打开菜单 File-&gt;New Module-&gt;Import .JAR or .AAR Package,导入imkit.aar</li>
 <li>将 libasync_tcp.so 放到工程的libs目录下</li>
 <li><p>在app的gradle文件中添加imkit模块的依赖</p>
 <pre><code>  compile &#39;com.android.support:support-v4:21.+&#39;
@@ -73,16 +74,21 @@
   compile &#39;joda-time:joda-time:2.5&#39;
 </code></pre></li>
 </ul>
+<h2 id="-imsdk-imkit-eclipse-">将imsdk，imkit加入到eclipse工程</h2>
+<ul>
+<li>将imsdk.jar pushsdk.jar asynctcp.jar加入工程</li>
+<li>将imkit作为library导入到工程中</li>
+<li>将 libasync_tcp.so 放到工程的libs目录下</li>
+</ul>
 <h2 id="androidmanifest-xml-">AndroidManifest.xml配置</h2>
 <ul>
 <li><p>manifest 标签下添加：</p>
 <pre><code>  &lt;!-- 必需： 权限配置 --&gt;
   &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
   &lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&gt;
-
-  &lt;uses-feature android:name=&quot;android.hardware.camera&quot; /&gt;
-  &lt;uses-feature android:name=&quot;android.hardware.camera.autofocus&quot; /&gt;
 </code></pre></li>
+</ul>
+<ul>
 <li><p>application 标签下添加：</p>
 <pre><code> &lt;!-- 必需： 应用ID(此处的id为您申请的应用id) --&gt;
  &lt;meta-data
