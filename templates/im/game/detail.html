@@ -105,6 +105,12 @@
         </p>
       {% endcall %}
 
+      {% call inline_field('发布时间:') %}
+        <p class="show-edit">
+          <span class="name">{{ data.gamedata.publish_time|datetime }}</span>
+        </p>
+      {% endcall %}
+
       {% call inline_field('') %}
         <a href="/im/game/{{data.gamedata.id}}" class="btn-s btn-info">编辑</a>
       {% endcall %}

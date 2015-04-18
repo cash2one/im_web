@@ -60,6 +60,7 @@ CREATE TABLE `app` (
   `key` varchar(32) CHARACTER SET ascii NOT NULL COMMENT 'app key',
   `secret` varchar(32) CHARACTER SET ascii NOT NULL COMMENT 'app secret',
   `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '应用状态，0开发 1生产',
+  `publish_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布时间戳',
   PRIMARY KEY (`id`),
   KEY `developer_id` (`developer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='应用';
