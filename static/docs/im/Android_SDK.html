@@ -63,23 +63,35 @@
 <li><p>在app的gradle文件中添加imkit模块的依赖</p>
 <pre><code>  compile &#39;com.android.support:support-v4:21.+&#39;
   compile &#39;com.android.support:appcompat-v7:21.+&#39;
-  compile &#39;com.google.code.gson:gson:2.+&#39;
-  compile &#39;com.squareup.picasso:picasso:2.4.+&#39;
-  compile &#39;com.squareup.retrofit:retrofit:1.7.+&#39;
-  compile &#39;com.netflix.rxjava:rxjava-core:0.17.+&#39;
-  compile &#39;com.netflix.rxjava:rxjava-android:0.17.+&#39;
-  compile &#39;com.squareup.okhttp:okhttp:2.1.+&#39;
-  compile &#39;com.squareup.okhttp:okhttp-urlconnection:2.1.+&#39;
+  compile &#39;com.google.code.gson:gson:2.3.1&#39;
+  compile &#39;com.squareup.picasso:picasso:2.4.0&#39;
+  compile &#39;com.squareup.retrofit:retrofit:1.7.1&#39;
+  compile &#39;com.netflix.rxjava:rxjava-core:0.17.6&#39;
+  compile &#39;com.netflix.rxjava:rxjava-android:0.17.6&#39;
+  compile &#39;com.squareup.okhttp:okhttp:2.1.0&#39;
+  compile &#39;com.squareup.okhttp:okhttp-urlconnection:2.1.0&#39;
   compile &#39;org.apache.commons:commons-io:1.3.2&#39;
   compile &#39;joda-time:joda-time:2.5&#39;
 </code></pre></li>
 </ul>
 <h2 id="-imsdk-imkit-eclipse-">将imsdk，imkit加入到eclipse工程</h2>
+<ol>
+<li><p>创建imkit的library</p>
 <ul>
-<li>将imsdk.jar pushsdk.jar asynctcp.jar加入工程</li>
-<li>将imkit作为library导入到工程中</li>
-<li>将 libasync_tcp.so 放到工程的libs目录下</li>
+<li>导入imkit目录</li>
+<li>将imkit工程设置成libary</li>
+<li>将appcompat-v7作为library加入到imkit工程，
+因为imkit使用了appcompat-v7的资源，所以不能仅仅只引入appcompat-v7的jar</li>
+<li>将imsdk.jar, asynctcp.jar放到imkit的libs目录下</li>
+<li>选中imkit/libs（或lib）目录下的每一个jar包，右键菜单中选择Build Path， 选择Add to Build Path将SDK添加到工程的引用目录中。</li>
+<li>选中imkit/libs目录下的jar, 右键菜单中选择Build Path， 选择Configure Build Path导出jar给app工程使用</li>
 </ul>
+</li>
+<li><p>选中app工程，右键菜单中选择Properties，选中android页面，将imkit工程添加到App工程中</p>
+</li>
+<li>将pushsdk.jar复制到app的libs目录中，并将jar添加到app工程的引用目录中</li>
+<li>将libasync_tcp.so 放到工程的libs目录下</li>
+</ol>
 <h2 id="androidmanifest-xml-">AndroidManifest.xml配置</h2>
 <ul>
 <li><p>manifest 标签下添加：</p>
