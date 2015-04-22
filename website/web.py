@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, render_template, send_from_directory, redirect, url_for
+from flask import Blueprint, render_template, send_from_directory, redirect, url_for,g
 import os
 from utils.func import init_logger
 
@@ -26,6 +26,7 @@ import website.views
 
 @web.route('/')
 def index():
+    g.uri_path = '/'
     return render_template('index/index.html')
 
 

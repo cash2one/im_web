@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="{{ url_for('web.static', filename='themes/bootstrap/css/bootstrap.min.css', v='0.12',_external=true) }}"/>
+    <link rel="stylesheet" href="{{ url_for('web.static', filename='themes/bootstrap/css/index.css', v='0.12',_external=true) }}"/>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+</div>
+{#<div class="header">#}
+{#    <div class="container">#}
+{#        <h1 class="logo" title="最少的移动IM"><strong>GoBelieve</strong></h1>#}
+{#        <ul class="menu">#}
+{#            <li><a href="{{ url_for('web.index',_external=true) }}">首页</a></li>#}
+{#            <li><a href="{{ url_for('web.price',_external=true) }}">价格</a></li>#}
+{#            <li><a href="https://github.com/GoBelieveIO" target="_blank">源代码</a></li>#}
+{#            <li><a href="{{ url_for('web.contact',_external=true) }}">联系我们</a></li>#}
+{#            <li>#}
+{#                <a class="btn btn-default" href="{{ url_for('web.im_index',_external=true) }}">登录</a>#}
+{#                <a class="btn btn-primary" href="{{ url_for('web.user_register',_external=true) }}">注册</a>#}
+{#            </li>#}
+{#        </ul>#}
+{#    </div>#}
+{#</div>#}
+<div class="main">
+    {% block body %}
+    {% endblock %}
+</div>
+<div class="footer">
+    <p class="copyright">
+        © Copyright gobelieve.io All Rights Reserved
+    </p>
+</div>
+
+</body>
+</html>

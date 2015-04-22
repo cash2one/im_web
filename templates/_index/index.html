@@ -1,0 +1,66 @@
+{% extends "index/base.html" %}
+
+{% block body %}
+    <div class="bg-wrap">
+        <div class="container">
+            <div class="banner-wrap">
+                <h1>极简的API设计，轻松接入sdk</h1>
+
+                <h2>
+                    个人聊天，群组聊天<br/>
+                    文字，图片，语音
+                </h2>
+
+                <h3>
+                    开源代码，提供无限定制的可能性<br/>
+                    可以为企业提供单独部署服务器
+                </h3>
+
+                <div class="hot">
+                    <img src="{{ url_for('web.static', filename='themes/default/images/im.png',_external=true) }}"
+                         title="最少的移动IM" alt="最少的移动IM"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="out-link">
+        <div class="inline toggle">
+            <span class="btn btn-gray btn-large">开发文档</span>
+
+            <div class="btn-wrap">
+                <a href="{{ url_for('web.static', filename='docs/im/Server.html',_external=true) }}"
+                   class="btn im-doc-link btn-primary">IM文档</a>
+                <a href="{{ url_for('web.static', filename='docs/voip/Server.html',_external=true) }}"
+                   class="btn voip-doc-link btn-primary">VOIP文档</a>
+            </div>
+        </div>
+        <div class="inline toggle">
+            <span class="btn btn-gray btn-large">SDK&Demo下载</span>
+
+            <div class="btn-wrap btn-wrap-large">
+                <a href="{{ url_for('web.static',filename='file/im_sdk_demo.zip',_external=true) }}"
+                   class="btn im-doc-link btn-primary">IM SDK&Demo</a>
+                <a href="{{ url_for('web.static',filename='file/voip_sdk_demo.zip',_external=true) }}"
+                   class="btn voip-doc-link btn-primary">VOIP SDK&Demo</a>
+            </div>
+        </div>
+        <a href="{{ url_for('web.im_index',_external=true) }}" class="btn btn-primary btn-large">申请接入</a>
+    </div>
+    <script src="{{ url_for('web.static', filename='js/website/lib/jquery.min.js',_external=true) }}"></script>
+    <script>
+        (function ($) {
+            var toggle = $('.toggle');
+            toggle.on('mouseenter',function(){
+                var _this = $(this);
+                _this.addClass('active').siblings('.toggle').removeClass('active');
+            });
+            $(document).on('click',function(e){
+                var tar = $(e.target);
+                if(!tar.hasClass('btn-gray')){
+                    toggle.removeClass('active');
+                }
+            })
+
+        }(jQuery));
+    </script>
+{% endblock %}

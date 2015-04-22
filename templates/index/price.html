@@ -1,28 +1,32 @@
 {% extends "index/base.html" %}
 {% block body %}
-    <div class="bg-1">
-        <div class="price">
-            <div class="container">
-
-                <h2>按需收费 为你所想</h2>
-
-                <p class="free">
-                    新应用前三个月免费使用
+    <div class="container price">
+        <div class="head-tip">
+            <div class="row">
+                <div class="col-md-5  hidden-sm hidden-xs"><span class="line"></span></div>
+                <div class="col-md-2  col-sm-2 ">价格</div>
+                <div class="col-md-5  hidden-sm hidden-xs"><span class="line"></span></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="body">
+                <div class="hi">
+                    <span>2</span>
+                    元
+                </div>
+                <p class="f">
+                    千人 / 天
                 </p>
 
-                <div class="item-wrap">
-                    <div class="item item-1">
-                        <h3>免费用户数量级</h3>
-
-                        <div class="s">
-                            <p>日活10万以下免费</p>
-                        </div>
-                    </div>
-                    <div class="item item-3">
-                        <h3>收费用户数量级</h3>
-
-                        <div class="s">
-                             <p>按日活用户数(10万以上) 每10万日活5000元每月(自然月)</p>
+                <p class="desc">
+                    不足千人不计费<br/>
+                    每月1号生成上个月的账单
+                </p>
+                <div class="ex row">
+                    <div class="row-md-12">
+                        <div class="box-1">
+                            某一应用某月的日活为 300， 700， 1900，2800<br />
+                            那么这个月的账单为 0 + 0 ＋ 2 ＋ 4 ＝ 6元。
                         </div>
                     </div>
                 </div>
