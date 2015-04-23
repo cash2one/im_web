@@ -63,10 +63,13 @@
         <p><span class="tips mr-5">请填写Android APK包的PackageName</span></p>
         <p class="error">&nbsp;</p>
 
-        <p class="">推送平台： <label><input type="radio" name="push_type" value="0" checked="checked" />内置</label>
-            <label><input type="radio" name="push_type" value="1"/>信鸽</label></p>
-
-        <div class="sub-form" id="form_xinge" style="">
+          {% call(client) print_as_platform_type(platform_name = "android") %}
+        <p class="">推送平台： <label><input type="radio" name="push_type" value="0" id="inner_push_type" {{ '' if client and client.certificate.xinge_access_id else 'checked="checked"' }} />内置</label>
+            <label><input type="radio" name="push_type" value="1" id="xinge_push_type" {{ 'checked="checked"' if client and client.certificate.xinge_access_id else '' }} />信鸽</label></p>
+            {% endcall %}
+          {% call(client) print_as_platform_type(platform_name = "android") %}
+        <div class="sub-form" id="form_xinge" {{ 'style="display: block;"' if client and client.certificate.xinge_access_id else 'style="display: none;"' }} >
+          {% endcall %}
            <table>
              {% call inline_field('信鸽 ACCESS ID：') %}
                <input type="text" name="xinge_access_id" id="xinge_access_id" class="ipt ipt-short"
