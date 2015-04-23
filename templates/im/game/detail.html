@@ -99,27 +99,27 @@
         {% endif %}
       {% endfor %}
 
-      {% call inline_field('应用状态:') %}
-        <p class="show-edit">
-          <span class="name">{{ "生产环境" if data.gamedata.status| int == 1 else "开发环境" }}</span>
-        </p>
-      {% endcall %}
+{#      {% call inline_field('应用状态:') %}#}
+{#        <p class="show-edit">#}
+{#          <span class="name">{{ "生产环境" if data.gamedata.status| int == 1 else "开发环境" }}</span>#}
+{#        </p>#}
+{#      {% endcall %}#}
 
-      {% call inline_field('发布时间:') %}
-        <p class="show-edit">
-          <span class="name">{{ data.gamedata.publish_time|datetime }}</span>
-        </p>
-      {% endcall %}
+{#      {% call inline_field('发布时间:') %}#}
+{#        <p class="show-edit">#}
+{#          <span class="name">{{ data.gamedata.publish_time|datetime }}</span>#}
+{#        </p>#}
+{#      {% endcall %}#}
 
       {% call inline_field('') %}
         <a href="/im/game/{{data.gamedata.id}}" class="btn-s btn-info">编辑</a>
       {% endcall %}
 
-      {% if data.gamedata.status| int == 0 %}
-      {% call inline_field('') %}
-        <a href="/im/game/publish/{{data.gamedata.id}}" class="btn-s btn-info">发布</a>
-      {% endcall %}
-      {% endif %}
+{#      {% if data.gamedata.status| int == 0 %}#}
+{#      {% call inline_field('') %}#}
+{#        <a href="/im/game/publish/{{data.gamedata.id}}" class="btn-s btn-info">发布</a>#}
+{#      {% endcall %}#}
+{#      {% endif %}#}
 
     </tbody>
   </table>

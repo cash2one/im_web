@@ -18,7 +18,15 @@ define(function (require, exports, module) {
                 item[itemIsChecked ? 'removeClass' : 'addClass']('checked');
                 platform[itemIsChecked ? 'hide' : 'show']()
             })
-        })
+        });
+
+        $('#inner_push_type').click(function() {
+            $('#form_xinge').css('display', 'none');
+        });
+
+        $('#xinge_push_type').click(function() {
+            $('#form_xinge').css('display', 'block');
+        });
     }
 
     function initGameForm(form, options) {
