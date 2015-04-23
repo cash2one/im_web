@@ -39,7 +39,8 @@ body {
           border: 0 !important;
           background-color: transparent;
           margin: 0 !important;
-          color: #fff;
+          color: #fff!important;
+          font-size: 14px!important;
 
         }
       }
@@ -83,12 +84,12 @@ body {
 
 .btn-3 {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 10px;
   background-color: #02d5f5;
   border: 1px solid #02d5f5;
   text-decoration: none;
   color: #16171b;
-  margin: 0 10px;
+  margin: 0 5px;
   border-radius: 5px;
   &:hover {
     text-decoration: none;
@@ -97,12 +98,12 @@ body {
 
 .btn-4, .btn-5, .btn-6 {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 10px;
   background-color: transparent;
   text-decoration: none;
   color: #00deff;
   border: 1px solid #00deff;
-  margin: 0 10px;
+  margin: 0 5px;
   border-radius: 5px;
   &:hover {
     text-decoration: none;
@@ -210,20 +211,22 @@ body {
     }
   }
 }
-.navbar-brand{
-  padding-top: 10px;
+
+.navbar-brand {
+  padding: 10px 0 0 0 ;
 }
+
 .contact {
   .map {
     text-align: center;
     max-width: 100%;
-    img{
-      border:1px solid #ddd;
+    img {
+      border: 1px solid #ddd;
     }
   }
   .body {
     .contact-list {
-      padding:30px;
+      padding: 30px;
       p {
         line-height: 32px;
         font-size: 18px;
@@ -308,6 +311,14 @@ body {
       }
 
     }
+  }
+  .btn-3 {
+    padding:10px 20px;
+    margin: 0 10px;
+  }
+  .btn-4, .btn-5, .btn-6 {
+    padding:10px 20px;
+    margin:0 10px;
   }
   .footer {
     .hot-word {
