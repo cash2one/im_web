@@ -63,3 +63,6 @@ REDIS_DATA_PASSWORD = None
 
 CA_KEY = os.path.join(APP_ROOT, 'configs', 'root.key')
 CA_CER = os.path.join(APP_ROOT, 'configs', 'root.cer')
+
+APP_ID = 'wxa5ed698cbbfe36e0'
+APP_SECRET = 'cd8c074afcb83815a9d0f278bfadf30b'
