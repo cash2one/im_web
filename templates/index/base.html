@@ -72,7 +72,7 @@
         src="{{ url_for('web.static', filename='js/website/lib/jweixin-1.0.0.js',_external=True) }}"></script>
 <script>
     wx.config({
-        debug: true,
+        debug: false,
         appId: '{{ sign.appid }}',
         timestamp: '{{ sign.timestamp }}',
         nonceStr: '{{ sign.nonceStr }}',
