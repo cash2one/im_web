@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, render_template, send_from_directory, redirect, url_for, g
-import os
+from flask import Blueprint, render_template,request, send_from_directory, redirect, url_for, g
+import os,time
 from utils.func import init_logger
+from config import APP_MODE,APP_ID,APP_SECRET
+import requests
+from utils.wx_sign import Sign
 
 LOGGER = init_logger(__name__)
 
@@ -21,7 +24,6 @@ def get_ticket():
             if int(t) + 7000 > int(time.time()):
                 fh.close()
                 return s
-    # access_token_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxc891ebaf608261cb&secret=149f6e83ef1ea173b755ce87c5fb482b'
     access_token_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + APP_ID + '&secret=' + APP_SECRET
     ret = requests.get(access_token_url)
     rs = ret.json()
@@ -35,7 +37,7 @@ def get_ticket():
 
 
 def get_weixin_sign():
-    if APP_MODE != 'Local':
+    if APP_MODE != 'Development':
         ticket = get_ticket()
         sign = Sign(ticket, request.url)
         sign = sign.sign()
