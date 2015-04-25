@@ -71,7 +71,7 @@
 <script type="text/javascript"
         src="{{ url_for('web.static', filename='js/web/lib/jweixin-1.0.0.js',_external=True) }}"></script>
 <script>
-      wx.config({
+    wx.config({
         debug: false,
         appId: '{{ sign.appid }}',
         timestamp: '{{ sign.timestamp }}',
@@ -108,7 +108,7 @@
         //分享到qq
         wx.onMenuShareQQ({
             title: 'GoBelieve-国内唯一开源IM服务',
-            desc: '我刚摇到了苏宁大红包，快来参与!',
+            desc: '一小时接入、自由定制、完全开源、私有云部署',
             link: '{{ url_for('web.index',_external=True) }}',
             imgUrl: '{{ url_for('web.static', filename='themes/bootstrap/images/logo_1.png',_external=True) }}',
             success: function () {
