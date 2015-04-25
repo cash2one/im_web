@@ -182,7 +182,7 @@ body {
   position: relative;
   .hot-word {
     color: #00deff;
-    font-size: 22px;
+    font-size: 18px;
     padding-top: 50px;
     line-height: 100px;
   }
@@ -294,6 +294,12 @@ body {
 }
 
 @media (min-width: $screen-sm-min) {
+  .footer {
+    .hot-word {
+      font-size: 22px;
+
+    }
+  }
   .banner {
     .desc {
       padding-top: 150px;
