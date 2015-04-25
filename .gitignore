@@ -24,3 +24,4 @@ node_modules/
 .logs
 test.py
 config.py
+_index/*

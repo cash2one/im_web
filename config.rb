@@ -2,8 +2,8 @@
 
 # Set this to the root of your project when deployed:
 http_path = "/"
-css_dir = "static/themes/default/css"
-sass_dir = "static/themes/default/scss"
+css_dir = "static/themes/bootstrap/css"
+sass_dir = "static/themes/bootstrap/scss"
 images_dir = "static/themes/default/images"
 
 # You can select your preferred output style here (can be overridden via the command line):
