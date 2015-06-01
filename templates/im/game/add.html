@@ -11,7 +11,7 @@
           <span>&gt;</span>
         </li>
         <li class="active">
-          <span>创建应用</span>
+          <span>{{ '创建应用' if data.method == 'add' else '修改应用' }}</span>
         </li>
       </ol>
     </div>

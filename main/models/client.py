@@ -211,6 +211,6 @@ class Client(God):
         return {
             'pkey_url': Certificate.create_download_url(self.get_id(), 'pkey', self.ctime),
             'cer_url': Certificate.create_download_url(self.get_id(), 'cer', self.ctime),
-            'xinge_access_id': certificate['xinge_access_id'],
-            'xinge_secret_key': certificate['xinge_secret_key']
+            'xinge_access_id': certificate.get('xinge_access_id'),
+            'xinge_secret_key': certificate.get('xinge_secret_key')
         }

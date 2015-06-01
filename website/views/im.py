@@ -51,6 +51,7 @@ def im_game_add():
     创建游戏
     """
     data = {}
+    data['method'] = 'add'
     data["game"] = {}
     data["game"]["name"] = ""
     data["game"]["id"] = ""
@@ -207,7 +208,7 @@ def im_game_edit(game_id):
     g.uri_path = request.path
     if game_id:
         game = _get_app(game_id).present()
-        return render_template('im/game/edit.html', data={'game': game})
+        return render_template('im/game/edit.html', data={'game': game, 'method': 'edit'})
 
 
 def push_common():

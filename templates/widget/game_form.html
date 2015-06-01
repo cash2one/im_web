@@ -1,135 +1,149 @@
 {% macro inline_field(label, required=False, extra_class="", wrapper_class="") -%}
-  <tr class="{{ wrapper_class }}">
-    <th>
-      <div class="th">
-        <label class="label-1">
-          {% if required %}<span class="star">*</span>{% endif %}
-          {{ label }}
-        </label>
-      </div>
-    </th>
-    <td>
-      <div class="td {{ extra_class }}">
-        {{ caller() }}
-      </div>
-    </td>
-  </tr>
+    <tr class="{{ wrapper_class }}">
+        <th>
+            <div class="th">
+                <label class="label-1">
+                    {% if required %}<span class="star">*</span>{% endif %}
+                    {{ label }}
+                </label>
+            </div>
+        </th>
+        <td>
+            <div class="td {{ extra_class }}">
+                {{ caller() }}
+            </div>
+        </td>
+    </tr>
 {%- endmacro %}
 
 {% macro print_as_platform_type(text, platform_name='', unless=False) -%}
-  {% if platform_name == 'android' %}
-    {% set platform_index = 1 %}
-  {% elif platform_name == 'ios' %}
-    {% set platform_index = 2 %}
-  {% endif %}
-
-  {% for client in data.game.clients %}
-    {% if (client.platform_type | int == platform_index) %}
-      {% if (not unless and client.is_active) or (not client.is_active and unless)%}
-        {{ text }} {{ caller(client) if caller }}
-      {% endif %}
+    {% if platform_name == 'android' %}
+        {% set platform_index = 1 %}
+    {% elif platform_name == 'ios' %}
+        {% set platform_index = 2 %}
     {% endif %}
-  {% endfor %}
+
+    {% for client in data.game.clients %}
+        {% if (client.platform_type | int == platform_index) %}
+            {% if (not unless and client.is_active) or (not client.is_active and unless) %}
+                {{ text }} {{ caller(client) if caller }}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
 {%- endmacro %}
 
 <table>
-  <tbody>
+    <tbody>
     {% block form_inner %}
-      {% call inline_field('应用名称:', required=True) %}
-        <input type="text" class="ipt" size="30"
-          maxlength="80" value="{{ data.game.name }}" name="name" id="name"
-          data-name="应用名称"
-          data-validate data-required>
-        <input type="hidden" name="" id="id" value="{{data.game.id}}">
-        <p class="error">&nbsp;</p>
-      {% endcall %}
-
-      {% call inline_field('支持平台:', required=True, extra_class="checkbox-group") %}
-        {% set klass = 'platform-item android %s'
-          % (print_as_platform_type('checked is-select', 'android') | trim) %}
-        <div data-action="showAndroid"
-          class="{{ klass }}">
-          <i></i><span>Android</span>
-        </div>
-      {% endcall %}
-
-      {% call inline_field(' ', required=True, wrapper_class="android-extra " +
-        print_as_platform_type('hide', 'android', unless=True) | trim) %}
-        <input type="text" name="android_identity" class="ipt client-android-identity"
-        {% call(client) print_as_platform_type(platform_name = "android") %}
-          value="{{client.platform_identity}}" readonly
+        {% call inline_field('应用名称:', required=True) %}
+            <input type="text" class="ipt" size="30"
+                   maxlength="80" value="{{ data.game.name }}" name="name" id="name"
+                   data-name="应用名称"
+                   data-validate data-required>
+            <input type="hidden" name="" id="id" value="{{ data.game.id }}">
+            <p class="error">&nbsp;</p>
         {% endcall %}
-        />
-        <p><span class="tips mr-5">请填写Android APK包的PackageName</span></p>
-        <p class="error">&nbsp;</p>
 
-          {% call(client) print_as_platform_type(platform_name = "android") %}
-        <p class="">推送平台： <label><input type="radio" name="push_type" value="0" id="inner_push_type" {{ '' if client and client.certificate.xinge_access_id else 'checked="checked"' }} />内置</label>
-            <label><input type="radio" name="push_type" value="1" id="xinge_push_type" {{ 'checked="checked"' if client and client.certificate.xinge_access_id else '' }} />信鸽</label></p>
-            {% endcall %}
-          {% call(client) print_as_platform_type(platform_name = "android") %}
-        <div class="sub-form" id="form_xinge" {{ 'style=display:block;' if client and client.certificate.xinge_access_id else 'style=display:none;' }} >
-          {% endcall %}
-           <table>
-             {% call inline_field('信鸽 ACCESS ID：') %}
-               <input type="text" name="xinge_access_id" id="xinge_access_id" class="ipt ipt-short"
-               {% call(client) print_as_platform_type(platform_name = "android") %}
-                      value="{{client.certificate.xinge_access_id if client.certificate.xinge_access_id else ''}}"
+        {% call inline_field('支持平台:', required=True, extra_class="checkbox-group") %}
+            {% set klass = 'platform-item android %s'
+          % (print_as_platform_type('checked is-select', 'android') | trim) %}
+            <div data-action="showAndroid"
+                 class="{{ klass }}">
+                <i></i><span>Android</span>
+            </div>
+        {% endcall %}
+
+        {% call inline_field(' ', required=True, wrapper_class="android-extra " +
+        print_as_platform_type('hide', 'android', unless=True) | trim) %}
+            <input type="text" name="android_identity" class="ipt client-android-identity"
+                    {% call(client) print_as_platform_type(platform_name = "android") %}
+                   value="{{ client.platform_identity }}" readonly
+                    {% endcall %}
+                    />
+            <p><span class="tips mr-5">请填写Android APK包的PackageName</span></p>
+            <p class="error">&nbsp;</p>
+
+
+            <p class="">推送平台： <label><input type="radio" name="push_type" value="0" id="inner_push_type"
+                    {% call(client) print_as_platform_type(platform_name = "android", unless=True if data['method'] == 'add' else False) %}
+                        {{ 'checked="checked"' if 'certificate' not in client or (not client.certificate.xinge_access_id) else '' }}
+                    {% endcall %}
+                    />内置</label>
+                <label><input type="radio" name="push_type" value="1" id="xinge_push_type"
+                        {% call(client) print_as_platform_type(platform_name = "android") %}
+                            {{ 'checked="checked"' if client and client.certificate.xinge_access_id else '' }}
+                        {% endcall %}
+                        />信鸽</label></p>
+
+
+            <div class="sub-form" id="form_xinge"
+                    {% call(client) print_as_platform_type(platform_name = "android", unless=True if data['method'] == 'add' else False) %}
+                        {{ 'style=display:none;' if 'certificate' not in client or (not client.certificate.xinge_access_id) else 'style=display:block;' }}
+                    {% endcall %}
+                    >
+
+
+            <table>
+                {% call inline_field('信鸽 ACCESS ID：') %}
+                    <input type="text" name="xinge_access_id" id="xinge_access_id" class="ipt ipt-short"
+                            {% call(client) print_as_platform_type(platform_name = "android") %}
+                           value="{{ client.certificate.xinge_access_id if client.certificate.xinge_access_id else '' }}"
+                            {% endcall %}
+                            />
                 {% endcall %}
-               />
-             {% endcall %}
 
-             {% call inline_field('信鸽 SECRET KEY：') %}
-               <input type="text" name="xinge_secret_key" id="xinge_secret_key" class="ipt ipt-short"
-               {% call(client) print_as_platform_type(platform_name = "android") %}
-                      value="{{client.certificate.xinge_secret_key if client.certificate.xinge_secret_key else ''}}"
-               {% endcall %}
-               />
-             {% endcall %}
-           </table>
+                {% call inline_field('信鸽 SECRET KEY：') %}
+                    <input type="text" name="xinge_secret_key" id="xinge_secret_key" class="ipt ipt-short"
+                            {% call(client) print_as_platform_type(platform_name = "android") %}
+                           value="{{ client.certificate.xinge_secret_key if client.certificate.xinge_secret_key else '' }}"
+                            {% endcall %}
+                            />
+                {% endcall %}
+            </table>
 
-      {% endcall %}
+        {% endcall %}
 
-      {% call inline_field('', extra_class="checkbox-group") %}
-        {% set klass = 'platform-item ios %s'
+        {% call inline_field('', extra_class="checkbox-group") %}
+            {% set klass = 'platform-item ios %s'
           % (print_as_platform_type('checked is-select', 'ios') | trim) %}
-        <div data-action="showIos" class="{{ klass }}">
-          <i></i><span>iOS</span></div>
-      {% endcall %}
+            <div data-action="showIos" class="{{ klass }}">
+                <i></i><span>iOS</span></div>
+        {% endcall %}
 
-      {% call inline_field(' ', required=True, wrapper_class="ios-extra " +
+        {% call inline_field(' ', required=True, wrapper_class="ios-extra " +
          print_as_platform_type('hide', 'ios', unless=True) | trim) %}
-         <input type="text" name="ios_identity" id="" class="ipt client-ios-identity"
-         {% call(client) print_as_platform_type(platform_name = "ios") %}
-           value="{{client.platform_identity}}" readonly
-         {% endcall %}
-         />
-         <p><span class="tips mr-5">请填写iOS IPA包的BundleID</span></p>
-         <p class="error">&nbsp;</p>
-         <div class="sub-form">
-           <table>
-             {% call inline_field('开发环境APNS证书：') %}
-               <input type="file" name="sandbox_key" id="develop_apns">
-             {% endcall %}
+            <input type="text" name="ios_identity" id="" class="ipt client-ios-identity"
+                    {% call(client) print_as_platform_type(platform_name = "ios") %}
+                   value="{{ client.platform_identity }}" readonly
+                    {% endcall %}
+                    />
+            <p><span class="tips mr-5">请填写iOS IPA包的BundleID</span></p>
+            <p class="error">&nbsp;</p>
+            <div class="sub-form">
+                <table>
+                    {% call inline_field('开发环境APNS证书：') %}
+                        <input type="file" name="sandbox_key" id="develop_apns">
+                    {% endcall %}
 
-             {% call inline_field('证书密码：') %}
-               <input type="password" name="sandbox_key_secret" id="sandbox_key_secret" class="ipt ipt-short">
-             {% endcall %}
+                    {% call inline_field('证书密码：') %}
+                        <input type="password" name="sandbox_key_secret" id="sandbox_key_secret" class="ipt ipt-short">
+                    {% endcall %}
 
-             {% call inline_field('生产环境APNS证书：') %}
-               <input type="file" name="production_key" id="production_apns">
-             {% endcall %}
+                    {% call inline_field('生产环境APNS证书：') %}
+                        <input type="file" name="production_key" id="production_apns">
+                    {% endcall %}
 
-             {% call inline_field('证书密码：') %}
-               <input type="password" name="production_key_secret" id="production_key_secret" class="ipt ipt-short">
-             {% endcall %}
-           </table>
-         </div>
-      {% endcall %}
+                    {% call inline_field('证书密码：') %}
+                        <input type="password" name="production_key_secret" id="production_key_secret"
+                               class="ipt ipt-short">
+                    {% endcall %}
+                </table>
+            </div>
+        {% endcall %}
     {% endblock %}
 
     {% call inline_field('') %}
-      <button type="submit" class="btn btn-info">提交</button>
+        <button type="submit" class="btn btn-info">提交</button>
     {% endcall %}
-  </tbody>
+    </tbody>
 </table>
