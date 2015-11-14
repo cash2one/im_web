@@ -53,7 +53,7 @@
             <h1 id="restapi">RestAPI</h1>
 <h2 id="-">接口地址</h2>
 <ul>
-<li>正式:<a href="http://api.gobelieve.io">http://api.gobelieve.io</a> 沙盒:<a href="http://sandbox.api.gobelieve.io">http://sandbox.api.gobelieve.io</a></li>
+<li>正式:<a href="https://api.gobelieve.io">https://api.gobelieve.io</a></li>
 </ul>
 <h2 id="-token">获取用户token</h2>
 <ul>
@@ -158,8 +158,9 @@
 <li>请求内容:</li>
 </ul>
 <pre><code> {
-    &quot;master_id&quot;:&quot;管理员id(整型)&quot;,
+    &quot;master&quot;:&quot;管理员id(整型)&quot;,
     &quot;name&quot;:&quot;群主题名&quot;,
+    &quot;super&quot;:&quot;超级群(布尔类型,可选)&quot;
     &quot;members&quot;:[&quot;uid&quot;,...]
  }
 </code></pre><ul>
@@ -203,6 +204,21 @@
 <li>成功响应：200</li>
 <li>操作失败：
 400 非法参数</li>
+</ul>
+<h3 id="-">群组消息免打扰模式</h3>
+<ul>
+<li>请求地址：<strong>POST /notification/groups/{gid}</strong></li>
+<li>是否认证：服务端授权和客户端授权</li>
+<li>请求头:Content-Type:application/json</li>
+<li><p>请求内容:</p>
+<p>  {</p>
+<pre><code>  &quot;quiet&quot;:&quot;是否推送离线消息(整形) 0:推送通知 1:不推送通知&quot;
+</code></pre><p>  }</p>
+</li>
+<li><p>成功响应：200</p>
+</li>
+<li>操作失败：
+状态码:400</li>
 </ul>
 
         </div>
