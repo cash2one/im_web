@@ -59,7 +59,7 @@
                     {% call(client) print_as_platform_type(platform_name = "android") %}
                    value="{{ client.platform_identity }}" readonly
                     {% endcall %}
-                    />
+            />
             <p><span class="tips mr-5">请填写Android APK包的PackageName</span></p>
             <p class="error">&nbsp;</p>
 
@@ -68,39 +68,72 @@
                     {% call(client) print_as_platform_type(platform_name = "android", unless=True if data['method'] == 'add' else False) %}
                         {{ 'checked="checked"' if 'certificate' not in client or (not client.certificate.xinge_access_id) else '' }}
                     {% endcall %}
-                    />内置</label>
+            />内置</label>
                 <label><input type="radio" name="push_type" value="1" id="xinge_push_type"
                         {% call(client) print_as_platform_type(platform_name = "android") %}
                             {{ 'checked="checked"' if client and client.certificate.xinge_access_id else '' }}
                         {% endcall %}
-                        />信鸽</label></p>
+                />信鸽</label>
+
+                <label><input type="radio" name="push_type" value="2" id="xiaomi_push_type"
+                        {% call(client) print_as_platform_type(platform_name = "android") %}
+                            {{ 'checked="checked"' if client and client.certificate.xiaomi_app_id else '' }}
+                        {% endcall %}
+                />小米</label>
+            </p>
 
 
             <div class="sub-form" id="form_xinge"
                     {% call(client) print_as_platform_type(platform_name = "android", unless=True if data['method'] == 'add' else False) %}
                         {{ 'style=display:none;' if 'certificate' not in client or (not client.certificate.xinge_access_id) else 'style=display:block;' }}
                     {% endcall %}
-                    >
+            >
 
 
-            <table>
-                {% call inline_field('信鸽 ACCESS ID：') %}
-                    <input type="text" name="xinge_access_id" id="xinge_access_id" class="ipt ipt-short"
-                            {% call(client) print_as_platform_type(platform_name = "android") %}
-                           value="{{ client.certificate.xinge_access_id if client.certificate.xinge_access_id else '' }}"
-                            {% endcall %}
-                            />
-                {% endcall %}
+                <table>
+                    {% call inline_field('信鸽 ACCESS ID：') %}
+                        <input type="text" name="xinge_access_id" id="xinge_access_id" class="ipt ipt-short"
+                                {% call(client) print_as_platform_type(platform_name = "android") %}
+                               value="{{ client.certificate.xinge_access_id if client.certificate.xinge_access_id else '' }}"
+                                {% endcall %}
+                        />
+                    {% endcall %}
 
-                {% call inline_field('信鸽 SECRET KEY：') %}
-                    <input type="text" name="xinge_secret_key" id="xinge_secret_key" class="ipt ipt-short"
-                            {% call(client) print_as_platform_type(platform_name = "android") %}
-                           value="{{ client.certificate.xinge_secret_key if client.certificate.xinge_secret_key else '' }}"
-                            {% endcall %}
-                            />
-                {% endcall %}
-            </table>
+                    {% call inline_field('信鸽 SECRET KEY：') %}
+                        <input type="text" name="xinge_secret_key" id="xinge_secret_key" class="ipt ipt-short"
+                                {% call(client) print_as_platform_type(platform_name = "android") %}
+                               value="{{ client.certificate.xinge_secret_key if client.certificate.xinge_secret_key else '' }}"
+                                {% endcall %}
+                        />
+                    {% endcall %}
+                </table>
+            </div>
 
+            <div class="sub-form" id="form_xiaomi"
+                    {% call(client) print_as_platform_type(platform_name = "android", unless=True if data['method'] == 'add' else False) %}
+                        {{ 'style=display:none;' if 'certificate' not in client or (not client.certificate.xiaomi_app_id) else 'style=display:block;' }}
+                    {% endcall %}
+            >
+
+
+                <table>
+                    {% call inline_field('小米 APP ID：') %}
+                        <input type="text" name="xiaomi_app_id" id="xiaomi_app_id" class="ipt ipt-short"
+                                {% call(client) print_as_platform_type(platform_name = "android") %}
+                               value="{{ client.certificate.xiaomi_app_id if client.certificate.xiaomi_app_id else '' }}"
+                                {% endcall %}
+                        />
+                    {% endcall %}
+
+                    {% call inline_field('小米 SECRET KEY：') %}
+                        <input type="text" name="xiaomi_secret_key" id="xiaomi_secret_key" class="ipt ipt-short"
+                                {% call(client) print_as_platform_type(platform_name = "android") %}
+                               value="{{ client.certificate.xiaomi_secret_key if client.certificate.xiaomi_secret_key else '' }}"
+                                {% endcall %}
+                        />
+                    {% endcall %}
+                </table>
+            </div>
         {% endcall %}
 
         {% call inline_field('', extra_class="checkbox-group") %}
@@ -116,7 +149,7 @@
                     {% call(client) print_as_platform_type(platform_name = "ios") %}
                    value="{{ client.platform_identity }}" readonly
                     {% endcall %}
-                    />
+            />
             <p><span class="tips mr-5">请填写iOS IPA包的BundleID</span></p>
             <p class="error">&nbsp;</p>
             <div class="sub-form">

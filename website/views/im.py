@@ -110,7 +110,14 @@ def im_apps_add():
                     xinge_access_id = request.form.get('xinge_access_id')
                     xinge_secret_key = request.form.get('xinge_secret_key')
 
-                client_obj.set_certificate(pkey, cer, xinge_access_id, xinge_secret_key)
+                xiaomi_app_id = None
+                xiaomi_secret_key = None
+                if request.form.get('xiaomi_app_id') and request.form.get('xiaomi_secret_key'):
+                    xiaomi_app_id = request.form.get('xiaomi_app_id')
+                    xiaomi_secret_key = request.form.get('xiaomi_secret_key')
+
+                client_obj.set_certificate(pkey, cer, xinge_access_id, xinge_secret_key, xiaomi_app_id,
+                                           xiaomi_secret_key)
 
             return redirect(url_for('.im_game_complete', game_id=app_obj.id))
     return redirect(url_for('.im_game_add'))
@@ -161,6 +168,13 @@ def im_apps_edit(app_id):
 
                     client_obj = Client().set_id(clt['id'])
                     client_obj.set_certificate(xinge_access_id=xinge_access_id, xinge_secret_key=xinge_secret_key)
+
+                if request.form.get('xiaomi_app_id') and request.form.get('xiaomi_secret_key'):
+                    xiaomi_app_id = request.form.get('xiaomi_app_id')
+                    xiaomi_secret_key = request.form.get('xiaomi_secret_key')
+
+                    client_obj = Client().set_id(clt['id'])
+                    client_obj.set_certificate(xiaomi_app_id=xiaomi_app_id, xiaomi_secret_key=xiaomi_secret_key)
 
     # 更新apns证书
     _update_apns(ios_client_id, clients, app_id)

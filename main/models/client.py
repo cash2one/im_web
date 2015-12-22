@@ -11,7 +11,7 @@ import time
 
 
 class Client(God):
-    __slots__ = ('app', )
+    __slots__ = ('app',)
     _db = MYSQL_GC
     _type = ObjectType.CLIENT
     _name = 'client'
@@ -133,14 +133,15 @@ class Client(God):
 
     def fetch_apns(self):
         rs = self.mysql.execute(
-            "SELECT sandbox_key_utime,sandbox_key_secret,production_key_utime,production_key_secret "
-            "FROM client_apns WHERE client_id=%s",
-            self.get_id()
+                "SELECT sandbox_key_utime,sandbox_key_secret,production_key_utime,production_key_secret "
+                "FROM client_apns WHERE client_id=%s",
+                self.get_id()
         )
 
         return rs.fetchone() or {}
 
-    def set_certificate(self, pkey=None, cer=None, xinge_access_id=None, xinge_secret_key=None):
+    def set_certificate(self, pkey=None, cer=None, xinge_access_id=None, xinge_secret_key=None, xiaomi_app_id=None,
+                        xiaomi_secret_key=None):
         row = self.fetch_certificate()
 
         certificate = {}
@@ -155,6 +156,11 @@ class Client(God):
         if xinge_access_id is not None and xinge_secret_key is not None:
             certificate['xinge_access_id'] = xinge_access_id
             certificate['xinge_secret_key'] = xinge_secret_key
+            certificate['update_time'] = int(time.time())
+
+        if xiaomi_app_id is not None and xiaomi_secret_key is not None:
+            certificate['xiaomi_app_id'] = xiaomi_app_id
+            certificate['xiaomi_secret_key'] = xiaomi_secret_key
             certificate['update_time'] = int(time.time())
 
         if row:
@@ -192,6 +198,8 @@ class Client(God):
                     'cer': certificate.get('cer', ''),
                     'xinge_access_id': certificate.get('xinge_access_id', ''),
                     'xinge_secret_key': certificate.get('xinge_secret_key', ''),
+                    'xiaomi_app_id': certificate.get('xiaomi_app_id', ''),
+                    'xiaomi_secret_key': certificate.get('xiaomi_secret_key', ''),
                     'update_time': certificate.get('update_time', 0),
                 }
 
@@ -199,9 +207,9 @@ class Client(God):
 
     def fetch_certificate(self):
         rs = self.mysql.execute(
-            "SELECT pkey, cer, xinge_access_id, xinge_secret_key, update_time "
-            "FROM client_certificate WHERE client_id=%s",
-            self.get_id()
+                "SELECT pkey, cer, xinge_access_id, xinge_secret_key, xiaomi_app_id, xiaomi_secret_key, update_time "
+                "FROM client_certificate WHERE client_id=%s",
+                self.get_id()
         )
 
         return rs.fetchone() or {}
@@ -212,5 +220,7 @@ class Client(God):
             'pkey_url': Certificate.create_download_url(self.get_id(), 'pkey', self.ctime),
             'cer_url': Certificate.create_download_url(self.get_id(), 'cer', self.ctime),
             'xinge_access_id': certificate.get('xinge_access_id'),
-            'xinge_secret_key': certificate.get('xinge_secret_key')
+            'xinge_secret_key': certificate.get('xinge_secret_key'),
+            'xiaomi_app_id': certificate.get('xiaomi_app_id'),
+            'xiaomi_secret_key': certificate.get('xiaomi_secret_key')
         }

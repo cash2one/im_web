@@ -12,3 +12,4 @@ pyopenssl
 raven
 blinker
 selenium
+service_identity

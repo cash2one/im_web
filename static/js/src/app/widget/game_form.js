@@ -20,12 +20,19 @@ define(function (require, exports, module) {
             })
         });
 
-        $('#inner_push_type').click(function() {
+        $('#inner_push_type').click(function () {
             $('#form_xinge').css('display', 'none');
+            $('#form_xiaomi').css('display', 'none');
         });
 
-        $('#xinge_push_type').click(function() {
+        $('#xinge_push_type').click(function () {
             $('#form_xinge').css('display', 'block');
+            $('#form_xiaomi').css('display', 'none');
+        });
+
+        $('#xiaomi_push_type').click(function () {
+            $('#form_xinge').css('display', 'none');
+            $('#form_xiaomi').css('display', 'block');
         });
     }
 
@@ -65,14 +72,14 @@ define(function (require, exports, module) {
             }
 
             var developApns = form.find('#develop_apns');
-            if(developApns.val() && developApns.val().split('.').pop() != 'p12') {
+            if (developApns.val() && developApns.val().split('.').pop() != 'p12') {
                 Tip.auto('请上传 `.p12` 格式的文件', 'error');
                 developApns.addClass('ipt-error');
                 return false;
             }
 
             var productionApns = form.find('#production_apns');
-            if(productionApns.val() && productionApns.val().split('.').pop() != 'p12') {
+            if (productionApns.val() && productionApns.val().split('.').pop() != 'p12') {
                 Tip.auto('请上传 `.p12` 格式的文件', 'error');
                 productionApns.addClass('ipt-error');
                 return false;
