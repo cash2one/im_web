@@ -140,36 +140,22 @@ class Client(God):
 
         return rs.fetchone() or {}
 
-    def set_certificate(self, pkey=None, cer=None, xinge_access_id=None, xinge_secret_key=None, xiaomi_app_id=None,
-                        xiaomi_secret_key=None):
+    def set_certificate(self, data):
         row = self.fetch_certificate()
 
-        certificate = {}
-        if pkey is not None and cer is not None:
-            certificate['pkey'] = pkey
-            certificate['cer'] = cer
-            certificate['update_time'] = int(time.time())
+        if data:
+            data['update_time'] = int(time.time())
         else:
             if row.get('update_time'):
-                certificate['update_time'] = row.get('update_time')
-
-        if xinge_access_id is not None and xinge_secret_key is not None:
-            certificate['xinge_access_id'] = xinge_access_id
-            certificate['xinge_secret_key'] = xinge_secret_key
-            certificate['update_time'] = int(time.time())
-
-        if xiaomi_app_id is not None and xiaomi_secret_key is not None:
-            certificate['xiaomi_app_id'] = xiaomi_app_id
-            certificate['xiaomi_secret_key'] = xiaomi_secret_key
-            certificate['update_time'] = int(time.time())
+                data['update_time'] = row.get('update_time')
 
         if row:
             params = []
             values = []
 
-            if certificate:
-                params.extend(["{}=%s".format(field) for field in certificate.keys()])
-                values.extend(certificate.values())
+            if data:
+                params.extend(["{}=%s".format(field) for field in data.keys()])
+                values.extend(data.values())
 
             if params:
                 sql = "UPDATE client_certificate SET {} WHERE client_id=%s".format(','.join(params))
@@ -177,11 +163,6 @@ class Client(God):
             else:
                 sql = None
         else:
-            data = {}
-
-            if certificate:
-                data.update(certificate)
-
             if data:
                 data['client_id'] = self.get_id()
                 params = ['%s'] * len(data)
@@ -192,23 +173,13 @@ class Client(God):
 
         if sql:
             if self.mysql.execute(sql, values):
-                return {
-                    'client_id': self.get_id(),
-                    'pkey': certificate.get('pkey', ''),
-                    'cer': certificate.get('cer', ''),
-                    'xinge_access_id': certificate.get('xinge_access_id', ''),
-                    'xinge_secret_key': certificate.get('xinge_secret_key', ''),
-                    'xiaomi_app_id': certificate.get('xiaomi_app_id', ''),
-                    'xiaomi_secret_key': certificate.get('xiaomi_secret_key', ''),
-                    'update_time': certificate.get('update_time', 0),
-                }
+                return data
 
         return None
 
     def fetch_certificate(self):
         rs = self.mysql.execute(
-                "SELECT pkey, cer, xinge_access_id, xinge_secret_key, xiaomi_app_id, xiaomi_secret_key, update_time "
-                "FROM client_certificate WHERE client_id=%s",
+                "SELECT * FROM client_certificate WHERE client_id=%s",
                 self.get_id()
         )
 
@@ -216,11 +187,10 @@ class Client(God):
 
     def get_certificate_url(self):
         certificate = self.fetch_certificate()
-        return {
-            'pkey_url': Certificate.create_download_url(self.get_id(), 'pkey', self.ctime),
-            'cer_url': Certificate.create_download_url(self.get_id(), 'cer', self.ctime),
-            'xinge_access_id': certificate.get('xinge_access_id'),
-            'xinge_secret_key': certificate.get('xinge_secret_key'),
-            'xiaomi_app_id': certificate.get('xiaomi_app_id'),
-            'xiaomi_secret_key': certificate.get('xiaomi_secret_key')
-        }
+
+        if certificate:
+            certificate['pkey_url'] = Certificate.create_download_url(self.get_id(), 'pkey', self.ctime)
+            certificate['cer_url'] = Certificate.create_download_url(self.get_id(), 'cer', self.ctime)
+
+            del certificate['pkey'], certificate['cer'], certificate['client_id']
+        return certificate

@@ -103,21 +103,16 @@ def im_apps_add():
                 crypto = Certificate(CA_KEY, CA_CER)
                 pkey, cer = crypto.create_client_certificate(android_client_id)
 
+                data = {
+                    'pkey': pkey,
+                    'cer': cer,
+                }
+
                 client_obj = Client().set_id(android_client_id)
-                xinge_access_id = None
-                xinge_secret_key = None
-                if request.form.get('xinge_access_id') and request.form.get('xinge_secret_key'):
-                    xinge_access_id = request.form.get('xinge_access_id')
-                    xinge_secret_key = request.form.get('xinge_secret_key')
 
-                xiaomi_app_id = None
-                xiaomi_secret_key = None
-                if request.form.get('xiaomi_app_id') and request.form.get('xiaomi_secret_key'):
-                    xiaomi_app_id = request.form.get('xiaomi_app_id')
-                    xiaomi_secret_key = request.form.get('xiaomi_secret_key')
+                data.update(_get_data())
 
-                client_obj.set_certificate(pkey, cer, xinge_access_id, xinge_secret_key, xiaomi_app_id,
-                                           xiaomi_secret_key)
+                client_obj.set_certificate(data)
 
             return redirect(url_for('.im_game_complete', game_id=app_obj.id))
     return redirect(url_for('.im_game_add'))
@@ -162,19 +157,10 @@ def im_apps_edit(app_id):
                 ios_client_id = clt['id']
         elif int(clt['platform_type']) == PlatformType.ANDROID:
             if clt['is_active']:
-                if request.form.get('xinge_access_id') and request.form.get('xinge_secret_key'):
-                    xinge_access_id = request.form.get('xinge_access_id')
-                    xinge_secret_key = request.form.get('xinge_secret_key')
-
+                data = _get_data()
+                if data:
                     client_obj = Client().set_id(clt['id'])
-                    client_obj.set_certificate(xinge_access_id=xinge_access_id, xinge_secret_key=xinge_secret_key)
-
-                if request.form.get('xiaomi_app_id') and request.form.get('xiaomi_secret_key'):
-                    xiaomi_app_id = request.form.get('xiaomi_app_id')
-                    xiaomi_secret_key = request.form.get('xiaomi_secret_key')
-
-                    client_obj = Client().set_id(clt['id'])
-                    client_obj.set_certificate(xiaomi_app_id=xiaomi_app_id, xiaomi_secret_key=xiaomi_secret_key)
+                    client_obj.set_certificate(data)
 
     # 更新apns证书
     _update_apns(ios_client_id, clients, app_id)
@@ -335,3 +321,38 @@ def _update_apns(ios_client_id, clients, app_id):
                 client_obj.feed(app_id=app_id)
 
                 client_obj.set_apns(sandbox_key, sandbox_key_secret, production_key, production_key_secret)
+
+
+def _get_data():
+    data = {}
+    push_types = request.form.getlist('push_type')
+
+    if 'xinge' in push_types and request.form.get('xinge_access_id') and request.form.get('xinge_secret_key'):
+        data['xinge_access_id'] = request.form.get('xinge_access_id')
+        data['xinge_secret_key'] = request.form.get('xinge_secret_key')
+    else:
+        data['xinge_access_id'] = 0
+        data['xinge_secret_key'] = ''
+
+    if 'mi' in push_types and request.form.get('mi_appid') and request.form.get('mi_secret_key'):
+        data['mi_appid'] = request.form.get('mi_appid')
+        data['mi_secret_key'] = request.form.get('mi_secret_key')
+    else:
+        data['mi_appid'] = 0
+        data['mi_secret_key'] = ''
+
+    if 'hw' in push_types and request.form.get('hw_appid') and request.form.get('hw_secret_key'):
+        data['hw_appid'] = request.form.get('hw_appid')
+        data['hw_secret_key'] = request.form.get('hw_secret_key')
+    else:
+        data['hw_appid'] = 0
+        data['hw_secret_key'] = ''
+
+    if 'gcm' in push_types and request.form.get('gcm_sender_id') and request.form.get('gcm_api_key'):
+        data['gcm_sender_id'] = request.form.get('gcm_sender_id')
+        data['gcm_api_key'] = request.form.get('gcm_api_key')
+    else:
+        data['gcm_sender_id'] = 0
+        data['gcm_api_key'] = ''
+
+    return data

@@ -20,20 +20,22 @@ define(function (require, exports, module) {
             })
         });
 
-        $('#inner_push_type').click(function () {
-            $('#form_xinge').css('display', 'none');
-            $('#form_xiaomi').css('display', 'none');
+        $('#xinge_push_type').change(function () {
+            $('#form_xinge').css('display', this.checked ? 'block' : 'none');
         });
 
-        $('#xinge_push_type').click(function () {
-            $('#form_xinge').css('display', 'block');
-            $('#form_xiaomi').css('display', 'none');
+        $('#mi_push_type').change(function () {
+            $('#form_mi').css('display', this.checked ? 'block' : 'none');
         });
 
-        $('#xiaomi_push_type').click(function () {
-            $('#form_xinge').css('display', 'none');
-            $('#form_xiaomi').css('display', 'block');
+        $('#hw_push_type').change(function () {
+            $('#form_hw').css('display', this.checked ? 'block' : 'none');
         });
+
+        $('#gcm_push_type').change(function () {
+            $('#form_gcm').css('display', this.checked ? 'block' : 'none');
+        });
+
     }
 
     function initGameForm(form, options) {

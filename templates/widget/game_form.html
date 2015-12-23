@@ -64,25 +64,36 @@
             <p class="error">&nbsp;</p>
 
 
-            <p class="">推送平台： <label><input type="radio" name="push_type" value="0" id="inner_push_type"
+            <p class="">推送平台： <label><input type="checkbox" name="push_type" value="inner" id="inner_push_type" disabled
                     {% call(client) print_as_platform_type(platform_name = "android", unless=True if data['method'] == 'add' else False) %}
-                        {{ 'checked="checked"' if 'certificate' not in client or (not client.certificate.xinge_access_id) else '' }}
+                        {{ 'checked="checked"' }}
                     {% endcall %}
             />内置</label>
-                <label><input type="radio" name="push_type" value="1" id="xinge_push_type"
+                <label><input type="checkbox" name="push_type" value="xinge" id="xinge_push_type"
                         {% call(client) print_as_platform_type(platform_name = "android") %}
                             {{ 'checked="checked"' if client and client.certificate.xinge_access_id else '' }}
                         {% endcall %}
                 />信鸽</label>
 
-                <label><input type="radio" name="push_type" value="2" id="xiaomi_push_type"
+                <label><input type="checkbox" name="push_type" value="mi" id="mi_push_type"
                         {% call(client) print_as_platform_type(platform_name = "android") %}
-                            {{ 'checked="checked"' if client and client.certificate.xiaomi_app_id else '' }}
+                            {{ 'checked="checked"' if client and client.certificate.mi_appid else '' }}
                         {% endcall %}
                 />小米</label>
+
+                <label><input type="checkbox" name="push_type" value="hw" id="hw_push_type"
+                        {% call(client) print_as_platform_type(platform_name = "android") %}
+                            {{ 'checked="checked"' if client and client.certificate.hw_appid else '' }}
+                        {% endcall %}
+                />华为</label>
+
+                <label><input type="checkbox" name="push_type" value="gcm" id="gcm_push_type"
+                        {% call(client) print_as_platform_type(platform_name = "android") %}
+                            {{ 'checked="checked"' if client and client.certificate.gcm_sender_id else '' }}
+                        {% endcall %}
+                />谷歌</label>
             </p>
-
-
+            <p>&nbsp;</p>
             <div class="sub-form" id="form_xinge"
                     {% call(client) print_as_platform_type(platform_name = "android", unless=True if data['method'] == 'add' else False) %}
                         {{ 'style=display:none;' if 'certificate' not in client or (not client.certificate.xinge_access_id) else 'style=display:block;' }}
@@ -109,31 +120,85 @@
                 </table>
             </div>
 
-            <div class="sub-form" id="form_xiaomi"
+            <div class="sub-form" id="form_mi"
                     {% call(client) print_as_platform_type(platform_name = "android", unless=True if data['method'] == 'add' else False) %}
-                        {{ 'style=display:none;' if 'certificate' not in client or (not client.certificate.xiaomi_app_id) else 'style=display:block;' }}
+                        {{ 'style=display:none;' if 'certificate' not in client or (not client.certificate.mi_appid) else 'style=display:block;' }}
                     {% endcall %}
             >
 
 
                 <table>
                     {% call inline_field('小米 APP ID：') %}
-                        <input type="text" name="xiaomi_app_id" id="xiaomi_app_id" class="ipt ipt-short"
+                        <input type="text" name="mi_appid" id="mi_appid" class="ipt ipt-short"
                                 {% call(client) print_as_platform_type(platform_name = "android") %}
-                               value="{{ client.certificate.xiaomi_app_id if client.certificate.xiaomi_app_id else '' }}"
+                               value="{{ client.certificate.mi_appid if client.certificate.mi_appid else '' }}"
                                 {% endcall %}
                         />
                     {% endcall %}
 
                     {% call inline_field('小米 SECRET KEY：') %}
-                        <input type="text" name="xiaomi_secret_key" id="xiaomi_secret_key" class="ipt ipt-short"
+                        <input type="text" name="mi_secret_key" id="mi_secret_key" class="ipt ipt-short"
                                 {% call(client) print_as_platform_type(platform_name = "android") %}
-                               value="{{ client.certificate.xiaomi_secret_key if client.certificate.xiaomi_secret_key else '' }}"
+                               value="{{ client.certificate.mi_secret_key if client.certificate.mi_secret_key else '' }}"
                                 {% endcall %}
                         />
                     {% endcall %}
                 </table>
             </div>
+
+            <div class="sub-form" id="form_hw"
+                    {% call(client) print_as_platform_type(platform_name = "android", unless=True if data['method'] == 'add' else False) %}
+                        {{ 'style=display:none;' if 'certificate' not in client or (not client.certificate.hw_appid) else 'style=display:block;' }}
+                    {% endcall %}
+            >
+
+
+                <table>
+                    {% call inline_field('华为 APP ID：') %}
+                        <input type="text" name="hw_appid" id="hw_appid" class="ipt ipt-short"
+                                {% call(client) print_as_platform_type(platform_name = "android") %}
+                               value="{{ client.certificate.hw_appid if client.certificate.hw_appid else '' }}"
+                                {% endcall %}
+                        />
+                    {% endcall %}
+
+                    {% call inline_field('华为 SECRET KEY：') %}
+                        <input type="text" name="hw_secret_key" id="hw_secret_key" class="ipt ipt-short"
+                                {% call(client) print_as_platform_type(platform_name = "android") %}
+                               value="{{ client.certificate.hw_secret_key if client.certificate.hw_secret_key else '' }}"
+                                {% endcall %}
+                        />
+                    {% endcall %}
+                </table>
+            </div>
+
+            <div class="sub-form" id="form_gcm"
+                    {% call(client) print_as_platform_type(platform_name = "android", unless=True if data['method'] == 'add' else False) %}
+                        {{ 'style=display:none;' if 'certificate' not in client or (not client.certificate.gcm_sender_id) else 'style=display:block;' }}
+                    {% endcall %}
+            >
+
+
+                <table>
+                    {% call inline_field('谷歌推送 SENDER ID：') %}
+                        <input type="text" name="gcm_sender_id" id="gcm_sender_id" class="ipt ipt-short"
+                                {% call(client) print_as_platform_type(platform_name = "android") %}
+                               value="{{ client.certificate.gcm_sender_id if client.certificate.gcm_sender_id else '' }}"
+                                {% endcall %}
+                        />
+                    {% endcall %}
+
+                    {% call inline_field('谷歌推送 API KEY：') %}
+                        <input type="text" name="gcm_api_key" id="gcm_api_key" class="ipt ipt-short"
+                                {% call(client) print_as_platform_type(platform_name = "android") %}
+                               value="{{ client.certificate.gcm_api_key if client.certificate.gcm_api_key else '' }}"
+                                {% endcall %}
+                        />
+                    {% endcall %}
+                </table>
+            </div>
+
+
         {% endcall %}
 
         {% call inline_field('', extra_class="checkbox-group") %}
