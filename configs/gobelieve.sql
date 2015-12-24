@@ -1,36 +1,36 @@
 /*
-SQLyog Ultimate v10.42 
-MySQL - 5.5.5-10.0.17-MariaDB-1~wheezy-log : Database - gobelieve
-*********************************************************************
+ Navicat Premium Data Transfer
+
+ Source Server         : gobelieve_aliyun
+ Source Server Type    : MySQL
+ Source Server Version : 50505
+ Source Host           : 10.251.43.254
+ Source Database       : gobelieve
+
+ Target Server Type    : MySQL
+ Target Server Version : 50505
+ File Encoding         : utf-8
+
+ Date: 12/24/2015 15:45:58 PM
 */
 
+SET NAMES utf8;
+SET FOREIGN_KEY_CHECKS = 0;
 
-/*!40101 SET NAMES utf8 */;
-
-/*!40101 SET SQL_MODE=''*/;
-
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`gobelieve` /*!40100 DEFAULT CHARACTER SET utf8 */;
-
-USE `gobelieve`;
-
-/*Table structure for table `_object` */
-
+-- ----------------------------
+--  Table structure for `_object`
+-- ----------------------------
 DROP TABLE IF EXISTS `_object`;
-
 CREATE TABLE `_object` (
   `id` bigint(13) unsigned NOT NULL AUTO_INCREMENT,
   `type` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1005 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1452 DEFAULT CHARSET=utf8;
 
-/*Table structure for table `account` */
-
+-- ----------------------------
+--  Table structure for `account`
+-- ----------------------------
 DROP TABLE IF EXISTS `account`;
-
 CREATE TABLE `account` (
   `id` bigint(15) unsigned NOT NULL COMMENT '全局id',
   `name` varchar(64) NOT NULL COMMENT '姓名',
@@ -48,10 +48,10 @@ CREATE TABLE `account` (
   KEY `role` (`role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='账号';
 
-/*Table structure for table `app` */
-
+-- ----------------------------
+--  Table structure for `app`
+-- ----------------------------
 DROP TABLE IF EXISTS `app`;
-
 CREATE TABLE `app` (
   `id` bigint(15) unsigned NOT NULL COMMENT '全局id',
   `name` varchar(256) NOT NULL COMMENT '名称',
@@ -65,10 +65,10 @@ CREATE TABLE `app` (
   KEY `developer_id` (`developer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='应用';
 
-/*Table structure for table `client` */
-
+-- ----------------------------
+--  Table structure for `client`
+-- ----------------------------
 DROP TABLE IF EXISTS `client`;
-
 CREATE TABLE `client` (
   `id` bigint(15) unsigned NOT NULL COMMENT '全局id',
   `app_id` bigint(15) unsigned NOT NULL COMMENT '应用',
@@ -85,10 +85,10 @@ CREATE TABLE `client` (
   KEY `ctime` (`ctime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='客户端';
 
-/*Table structure for table `client_apns` */
-
+-- ----------------------------
+--  Table structure for `client_apns`
+-- ----------------------------
 DROP TABLE IF EXISTS `client_apns`;
-
 CREATE TABLE `client_apns` (
   `client_id` bigint(15) unsigned NOT NULL COMMENT '客户端',
   `sandbox_key` blob NOT NULL COMMENT '沙盒模式的证书',
@@ -100,24 +100,30 @@ CREATE TABLE `client_apns` (
   PRIMARY KEY (`client_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='iOS客户端apns证书';
 
-/*Table structure for table `client_certificate` */
-
+-- ----------------------------
+--  Table structure for `client_certificate`
+-- ----------------------------
 DROP TABLE IF EXISTS `client_certificate`;
-
 CREATE TABLE `client_certificate` (
   `client_id` bigint(15) unsigned NOT NULL COMMENT '客户端',
   `pkey` text NOT NULL COMMENT '私钥',
   `cer` text CHARACTER SET ascii COLLATE ascii_bin NOT NULL COMMENT '证书',
   `update_time` int(10) unsigned NOT NULL COMMENT '修改时间',
-  `xinge_access_id` bigint(20) DEFAULT NULL COMMENT '信鸽ID',
-  `xinge_secret_key` varchar(64) CHARACTER SET ascii DEFAULT NULL COMMENT '信鸽密钥',
+  `xinge_access_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '信鸽ID',
+  `xinge_secret_key` varchar(64) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT '信鸽密钥',
+  `mi_appid` bigint(20) NOT NULL DEFAULT '0' COMMENT '小米推送ID',
+  `mi_secret_key` varchar(64) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT '小米推送密钥',
+  `hw_appid` bigint(20) NOT NULL DEFAULT '0' COMMENT '华为推送ID',
+  `hw_secret_key` varchar(64) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT '华为推送密钥',
+  `gcm_sender_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '谷歌发送者ID',
+  `gcm_api_key` varchar(64) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT '谷歌推送API密钥',
   PRIMARY KEY (`client_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='android证书';
 
-/*Table structure for table `verify_email` */
-
+-- ----------------------------
+--  Table structure for `verify_email`
+-- ----------------------------
 DROP TABLE IF EXISTS `verify_email`;
-
 CREATE TABLE `verify_email` (
   `email` varchar(128) CHARACTER SET ascii NOT NULL COMMENT '邮件',
   `usage_type` tinyint(3) unsigned NOT NULL COMMENT '1：开发者邮箱验证',
@@ -127,7 +133,4 @@ CREATE TABLE `verify_email` (
   PRIMARY KEY (`usage_type`,`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='邮箱验证';
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+SET FOREIGN_KEY_CHECKS = 1;
