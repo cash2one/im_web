@@ -109,6 +109,21 @@
 400 非法参数</p>
 </li>
 </ul>
+<h3 id="-">设置用户名</h3>
+<ul>
+<li>请求地址：<strong> POST /users/{uid}</strong></li>
+<li>是否认证：服务端授权</li>
+<li><p>请求内容:</p>
+<pre><code>  {
+      &quot;name&quot;:&quot;用户名&quot;
+  }
+</code></pre></li>
+<li><p>成功响应：200</p>
+</li>
+<li><p>操作失败：
+400 非法参数</p>
+</li>
+</ul>
 <h3 id="-id-token">绑定用户id和推送token</h3>
 <ul>
 <li>请求地址：<strong>POST /device/bind </strong></li>
@@ -123,6 +138,9 @@
       &quot;apns_device_token&quot;: &quot;IOS设备token，16进制字符串(可选)&quot;,
       &quot;ng_device_token&quot;: &quot;android设备token，16进制字符串(可选)&quot;,
       &quot;xg_device_token&quot;: &quot;android 信鸽devicetoken(可选)&quot;
+      &quot;xm_device_token&quot;: &quot;android 小米推送的devicetoken(可选)&quot;
+      &quot;hw_device_token&quot;: &quot;android 华为推送的devicetoken(可选)&quot;
+      &quot;gcm_device_token&quot;: &quot;android google推送的devicetoken(可选)&quot;
   }
 </code></pre></li>
 <li><p>成功响应 200</p>
@@ -142,6 +160,9 @@
       &quot;apns_device_token&quot;: &quot;IOS设备token，16进制字符串(可选)&quot;,
       &quot;ng_device_token&quot;: &quot;android设备token，16进制字符串(可选)&quot;,
       &quot;xg_device_token&quot;: &quot;android 信鸽devicetoken(可选)&quot;
+      &quot;xm_device_token&quot;: &quot;android 小米推送的devicetoken(可选)&quot;
+      &quot;hw_device_token&quot;: &quot;android 华为推送的devicetoken(可选)&quot;
+      &quot;gcm_device_token&quot;: &quot;android google推送的devicetoken(可选)&quot;
   }
 </code></pre></li>
 <li><p>成功响应 200</p>
