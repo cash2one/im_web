@@ -14,7 +14,9 @@
                         <p>激活邮件已发送到您的邮箱: <span class="blue">{{data.mail}}</span></p>
                         <p>请在24小时内进入您的邮箱收信，按照邮件中的提示完成帐号激活</p>
                         <div class="btn-area clearfix">
+                            {% if data.redirect %}
                             <a href="{{data.redirect}}" class="btn-s btn-info mr lf" target="_blank">打开邮箱</a>
+                            {% endif %}
                             <a href="#" data-action="resend" class="btn-s btn-success lf">重发激活邮件</a>
                         </div>
                         <div class="tip-wrapper">
