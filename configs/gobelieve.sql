@@ -14,6 +14,9 @@
  Date: 12/24/2015 15:45:58 PM
 */
 
+CREATE DATABASE  IF NOT EXISTS `gobelieve`;
+USE `gobelieve`;
+
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -61,6 +64,8 @@ CREATE TABLE `app` (
   `secret` varchar(32) CHARACTER SET ascii NOT NULL COMMENT 'app secret',
   `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '应用状态，0开发 1生产',
   `publish_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布时间戳',
+  `cs_group_id` bigint(15) DEFAULT '0' COMMENT 'customer service group id',
+  `cs_mode` tinyint(3) DEFAULT '1' COMMENT 'customer service mode, 1固定客服 2在线客服 3广播',
   PRIMARY KEY (`id`),
   KEY `developer_id` (`developer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='应用';
