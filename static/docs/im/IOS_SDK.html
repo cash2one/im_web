@@ -53,11 +53,7 @@
             <h1 id="ios-sdk-">iOS SDK 接入指南</h1>
 <h2 id="-">项目配置</h2>
 <ul>
-<li>在工程target的&quot;Build Settings&quot;中，找到&quot;Linking&quot;的&quot;Other Linker Flags&quot;，添加参数<code>-ObjC</code>。</li>
-<li>在Build Phases的Link Binary With Libraries中添加 libimsdk.a libimkit.a</li>
-<li>将imsdk和imkit的头文件加入到 User Header Search Paths中</li>
-<li>将imKitRes包含的资源文件加入到工程中</li>
-<li>将imkit的第三方依赖加入工程 FBShimmering HPGrowingTextView SDWebImage Titanium Toast</li>
+<li>pod &#39;gobelieve&#39;, :git =&gt; &#39;git@github.com:GoBelieveIO/im_ios.git&#39;</li>
 </ul>
 <h2 id="imsdk">IMSDK</h2>
 <ul>
@@ -65,7 +61,6 @@
 </ul>
 <h2 id="-">配置服务地址</h2>
 <pre><code>//app可以单独部署服务器，给予第三方应用更多的灵活性
-//在开发阶段也可以配置成测试环境的地址 &quot;sandbox.imnode.gobelieve.io&quot;, &quot;sandbox.api.gobelieve.io&quot;
 [IMHttpAPI instance].apiURL = @&quot;api.gobelieve.io&quot;
 [IMService instance].host = @&quot;imnode.gobelieve.io&quot;
 </code></pre><h2 id="-im">初始化IM</h2>
@@ -77,10 +72,13 @@
 </code></pre><h2 id="-im-accesstoken-im">用户登录成功后启动IM，设置用户的accesstoken并启动im</h2>
 <pre><code>[IMHttpAPI instance].accessToken = accessToken;
 [IMService instance].accessToken = accessToken;
+[IMService instance].uid = uid;
 [[IMService instance] start];
+</code></pre><h2 id="-devicetoken-">绑定当前用户的devicetoken用于离线消息推送</h2>
+<pre><code>[IMHttpAPI bindDeviceToken];
 </code></pre><h2 id="-devicetoken-im">用户注销后清空用户的devicetoken并停止IM</h2>
 <pre><code>[IMHttpAPI unbindDeviceToken];
-[IMService instance].accessToken = @&quot;&quot;
+[IMService instance].accessToken = @&quot;&quot;;
 [[IMService instance] stop];
 </code></pre><h2 id="-im-">应用切到后台暂停IM,此后所有的消息将通过推送通道下发</h2>
 <pre><code>[[IMService instance] enterBackground];
@@ -104,7 +102,10 @@
 <h3 id="-access-token">设置当前用户的access token</h3>
 <pre><code>属性名：String accessToken
 功能：在调用start之前必须要设置用户的accessToken，token是由第三方应用服务器调用IM服务器RestAPI所得。
-</code></pre><h3 id="-id">设置当前设备的id</h3>
+</code></pre><h3 id="-id">设置当前用户id</h3>
+<pre><code>属性名:int64_t uid
+功能：在调用start之前必须要设置用户的uid
+</code></pre><h3 id="-id">设置当前设备id</h3>
 <pre><code>属性名：String deviceID
 功能：设备id可以用户多点登陆的唯一性判断,可选调用
 </code></pre><h3 id="-">监控网络变化</h3>

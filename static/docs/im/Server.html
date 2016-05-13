@@ -311,68 +311,6 @@
 <li>操作失败：
 状态码:400</li>
 </ul>
-<h3 id="-">配置客服功能</h3>
-<ul>
-<li>请求地址：<strong>PATCH /applications/{appid}</strong></li>
-<li>是否认证：服务端授权</li>
-<li>请求头:Content-Type:application/json</li>
-<li><p>请求内容:</p>
-<p>  {</p>
-<pre><code>  &quot;customer_service&quot;:&quot;True:激活&quot;,
-  &quot;customer_service_mode&quot;:&quot;客服模式, 1:固定 2:在线 3:群发&quot;
-</code></pre><p>  }</p>
-</li>
-<li><p>成功响应：200</p>
-</li>
-<li>操作失败：
-状态码:400</li>
-</ul>
-<h3 id="-">添加客服</h3>
-<ul>
-<li>请求地址：<strong>POST /staffs</strong></li>
-<li>是否认证：服务端授权</li>
-<li>请求头:Content-Type:application/json</li>
-<li><p>请求内容:</p>
-<p>  {</p>
-<pre><code>  &quot;staff_uid&quot;:&quot;客服uid(整型)&quot;,
-  &quot;staff_name&quot;:&quot;客服名称&quot;
-</code></pre><p>  }</p>
-</li>
-<li><p>成功响应：200</p>
-<p> {</p>
-<pre><code>  &quot;id&quot;:&quot;客服id(整型)&quot;
-</code></pre><p> }</p>
-</li>
-</ul>
-<ul>
-<li>操作失败：
-状态码:400</li>
-</ul>
-<h3 id="-">删除客服</h3>
-<ul>
-<li>请求地址：<strong>DELETE /staffs/{staff_id}</strong></li>
-<li>是否认证：服务端授权</li>
-<li>请求头:Content-Type:application/json</li>
-</ul>
-<ul>
-<li>成功响应：200</li>
-<li>操作失败：
-状态码:400</li>
-</ul>
-<h3 id="-">客服人员上线\下线</h3>
-<ul>
-<li>请求地址：<strong>PATCH /staffs/{staff_id}</strong></li>
-<li>是否认证：服务端授权</li>
-<li><p>请求头:Content-Type:application/json</p>
-<p>  {</p>
-<pre><code>  &quot;state&quot;:&quot;online或者offline&quot;
-</code></pre><p>  }</p>
-</li>
-<li><p>成功响应：200</p>
-</li>
-<li>操作失败：
-状态码:400</li>
-</ul>
 
         </div>
     </div>
