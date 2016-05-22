@@ -141,18 +141,20 @@
 </ul>
 <h2 id="-im">初始化IM</h2>
 <ul>
-<li>在开始IM服务之前需要设置用户accessToken以及添加IMServiceObserver监听状态回调.</li>
-</ul>
-<pre><code>    mIMService = IMService.getInstance();
-    String androidID = Settings.Secure.getString(getContentResolver(),
-        Settings.Secure.ANDROID_ID);
+<li><p>在开始IM服务之前需要设置用户accessToken以及添加IMServiceObserver监听状态回调.</p>
+<pre><code>  mIMService = IMService.getInstance();
+  String androidID = Settings.Secure.getString(getContentResolver(),
+      Settings.Secure.ANDROID_ID);
 
-    //设置设备唯一标识,用于多点登录时设备校验
-    mIMService.setDeviceID(androidID);
-    //监听网络状态变化
-    mIMService.registerConnectivityChangeReceiver(getApplicationContext());
-</code></pre><h2 id="-im-accesstoken-im">用户登录成功后启动IM，设置用户的accesstoken并启动im</h2>
-<pre><code>     IMHttpAPI.Singleton().setToken(accessToken);
+  //设置设备唯一标识,用于多点登录时设备校验
+  mIMService.setDeviceID(androidID);
+  //监听网络状态变化
+  Context context = getApplicationContext();
+  mIMService.registerConnectivityChangeReceiver(context);
+</code></pre></li>
+</ul>
+<h2 id="-im-accesstoken-im">用户登录成功后启动IM，设置用户的accesstoken并启动im</h2>
+<pre><code>     IMHttpAPI.setToken(token);
      mIMService.setAccessToken(accessToken);
      mIMService.setUID(uid);
      mIMService.start();
