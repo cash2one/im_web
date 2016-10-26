@@ -64,7 +64,7 @@
             <p class="error">&nbsp;</p>
 
 
-            <p class="">推送平台： <label><input type="checkbox" name="push_type" value="inner" id="inner_push_type" disabled
+            <p class="">推送平台： <label style=display:none;><input type="checkbox" name="push_type" value="inner" id="inner_push_type" disabled
                     {% call(client) print_as_platform_type(platform_name = "android", unless=True if data['method'] == 'add' else False) %}
                         {{ 'checked="checked"' }}
                     {% endcall %}
@@ -92,6 +92,11 @@
                             {{ 'checked="checked"' if client and client.certificate.gcm_sender_id else '' }}
                         {% endcall %}
                 />谷歌</label>
+                <label><input type="checkbox" name="push_type" value="ali" id="ali_push_type"
+                        {% call(client) print_as_platform_type(platform_name = "android") %}
+                            {{ 'checked="checked"' if client and client.certificate.ali_access_key_id else '' }}
+                        {% endcall %}
+                />阿里</label>
             </p>
             <p>&nbsp;</p>
             <div class="sub-form" id="form_xinge"
@@ -195,6 +200,41 @@
                                 {% endcall %}
                         />
                     {% endcall %}
+                </table>
+            </div>
+
+            <div class="sub-form" id="form_ali"
+                    {% call(client) print_as_platform_type(platform_name = "android", unless=True if data['method'] == 'add' else False) %}
+                        {{ 'style=display:none;' if 'certificate' not in client or (not client.certificate.ali_access_key_id) else 'style=display:block;' }}
+                    {% endcall %}
+            >
+
+
+                <table>
+                    {% call inline_field('阿里 ACCESS KEY：') %}
+                        <input type="text" name="ali_access_key_id" id="ali_access_key_id" class="ipt ipt-short"
+                                {% call(client) print_as_platform_type(platform_name = "android") %}
+                               value="{{ client.certificate.ali_access_key_id if client.certificate.ali_access_key_id else '' }}"
+                                {% endcall %}
+                        />
+                    {% endcall %}
+
+                    {% call inline_field('阿里 ACCESS SECRET：') %}
+                        <input type="text" name="ali_access_secret" id="ali_access_secret" class="ipt ipt-short"
+                                {% call(client) print_as_platform_type(platform_name = "android") %}
+                               value="{{ client.certificate.ali_access_secret if client.certificate.ali_access_secret else '' }}"
+                                {% endcall %}
+                        />
+                    {% endcall %}
+
+                    {% call inline_field('阿里 APP KEY：') %}
+                        <input type="text" name="ali_app_key" id="ali_app_key" class="ipt ipt-short"
+                                {% call(client) print_as_platform_type(platform_name = "android") %}
+                               value="{{ client.certificate.ali_app_key if client.certificate.ali_app_key else '' }}"
+                                {% endcall %}
+                        />
+                    {% endcall %}
+
                 </table>
             </div>
 

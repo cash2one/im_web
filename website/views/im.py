@@ -355,4 +355,14 @@ def _get_data():
         data['gcm_sender_id'] = 0
         data['gcm_api_key'] = ''
 
+    if 'ali' in push_types and request.form.get('ali_access_key_id') and request.form.get('ali_access_secret') \
+            and request.form.get('ali_app_key'):
+        data['ali_access_key_id'] = request.form.get('ali_access_key_id')
+        data['ali_access_secret'] = request.form.get('ali_access_secret')
+        data['ali_app_key'] = request.form.get('ali_app_key')
+    else:
+        data['ali_access_key_id'] = ''
+        data['ali_access_secret'] = ''
+        data['ali_app_key'] = 0
+
     return data

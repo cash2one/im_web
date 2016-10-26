@@ -36,6 +36,10 @@ define(function (require, exports, module) {
             $('#form_gcm').css('display', this.checked ? 'block' : 'none');
         });
 
+        $('#ali_push_type').change(function () {
+            $('#form_ali').css('display', this.checked ? 'block' : 'none');
+        });
+
     }
 
     function initGameForm(form, options) {

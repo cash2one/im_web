@@ -87,10 +87,43 @@
                     {% endif %}
                   </p>
                 {% else %}
-                  <p class="apns-wrapper">
-                    <span class="mr"><a href="{{ item.certificate.pkey_url }}">公钥下载</a></span>
-                    <span class="mr"><a href="{{ item.certificate.cer_url }}">证书下载</a></span>
+                    <p class="apns-wrapper">
+
+                    {% if item.certificate.xinge_access_id | int == 0 %}
+                      <span class="error mr"><strong class="mr-5">×</strong>信鸽</span>
+                    {% else %}
+                      <span class="success mr"><strong class="mr-5">√</strong>信鸽</span>
+                    {% endif %}
+
+                    {% if item.certificate.mi_appid | int == 0 %}
+                      <span class="error mr"><strong class="mr-5">×</strong>小米</span>
+                    {% else %}
+                      <span class="success mr"><strong class="mr-5">√</strong>小米</span>
+                    {% endif %}
+
+                    {% if item.certificate.hw_appid | int == 0 %}
+                      <span class="error mr"><strong class="mr-5">×</strong>华为</span>
+                    {% else %}
+                      <span class="success mr"><strong class="mr-5">√</strong>华为</span>
+                    {% endif %}
+
+                    {% if item.certificate.gcm_sender_id | int == 0 %}
+                      <span class="error mr"><strong class="mr-5">×</strong>谷歌</span>
+                    {% else %}
+                      <span class="success mr"><strong class="mr-5">√</strong>谷歌</span>
+                    {% endif %}
+
+                    {% if item.certificate.ali_app_key | int == 0 %}
+                      <span class="error mr"><strong class="mr-5">×</strong>阿里</span>
+                    {% else %}
+                      <span class="success mr"><strong class="mr-5">√</strong>阿里</span>
+                    {% endif %}
+
                   </p>
+{#                  <p class="apns-wrapper" style="display: none;">#}
+{#                    <span class="mr"><a href="{{ item.certificate.pkey_url }}">公钥下载</a></span>#}
+{#                    <span class="mr"><a href="{{ item.certificate.cer_url }}">证书下载</a></span>#}
+{#                  </p>#}
                 {% endif %}
                 <p class="error">&nbsp;</p>
               </div>
